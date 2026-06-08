@@ -1,0 +1,94 @@
+@import "tailwindcss";
+@tailwind utilities;
+
+@font-face {
+  font-family: "Pixel";
+  src: url("../assets/fonts/pixel.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+html, body {
+  background: transparent !important;
+  margin: 0;
+  overflow: hidden;
+}
+
+.button-hover {
+  position: relative;
+}
+
+.button-hover::after {
+  width: 48px;
+  height: 48px;
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: 
+    translate(-12px, -12px)
+    scale(0);
+  opacity: 0;
+  background: 
+    url("../assets/borders/hover.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  z-index: 2;
+  transition: all 0.1s ease-in-out;
+}
+
+.button-hover.active::after {
+  opacity: 1 !important;
+  transform: 
+    translate(-12px, -12px)
+    scale(1) !important;
+}
+
+.no-hover * {
+  pointer-events: none !important;
+}
+
+@layer components {
+  
+  * {
+    font-family: "Pixel", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* #root {
+    @apply max-h-screen flex flex-col relative gap-2
+  } */
+
+  .border- {
+    @apply bg-[#e8cfa6] rounded-xl;
+    border: 12px solid transparent;
+    border-image: url("../assets/borders/brown-light.png") 12% stretch;
+    background-clip: padding-box;
+    image-rendering: pixelated;
+  }
+  
+  .navbar {
+    @apply w-full flex justify-evenly
+  }
+  
+  .completed::before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 3px;
+    background: white;
+    transform: translateY(-50%);
+  }
+
+  .input-border {
+    @apply bg-[#8c7369]  text-[white];
+    border: 15px solid transparent;
+    border-image: url("../assets/input/wood.png") 25% stretch;
+    background-clip: padding-box;
+    image-rendering: pixelated;
+  }
+}
