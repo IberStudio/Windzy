@@ -16,31 +16,29 @@ html, body {
 
 .button-hover {
   position: relative;
+  display: inline-block;
 }
 
 .button-hover::after {
-  width: 48px;
-  height: 48px;
   content: "";
+  box-sizing: border-box;
   position: absolute;
-  inset: 0;
-  transform: 
-    translate(-12px, -12px)
-    scale(0);
+  width: 100%;
+  height: 100%;
+  top: 0; 
+  left: 0;
   opacity: 0;
-  background: 
-    url("../assets/borders/hover.png");
-  background-repeat: no-repeat;
-  background-size: 100%;
+  scale: 0;
+  border: 8px solid transparent;
+  border-image: 
+    url("../assets/borders/hover.png") 30% stretch;
   z-index: 2;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .button-hover.active::after {
   opacity: 1 !important;
-  transform: 
-    translate(-12px, -12px)
-    scale(1) !important;
+  scale: 1.8;
 }
 
 .no-hover * {
@@ -62,14 +60,6 @@ html, body {
   /* #root {
     @apply max-h-screen flex flex-col relative gap-2
   } */
-
-  .border- {
-    @apply bg-[#e8cfa6] rounded-xl;
-    border: 12px solid transparent;
-    border-image: url("../assets/borders/brown-light.png") 12% stretch;
-    background-clip: padding-box;
-    image-rendering: pixelated;
-  }
   
   .navbar {
     @apply w-full flex justify-evenly

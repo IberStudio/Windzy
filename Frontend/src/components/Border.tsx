@@ -13,6 +13,7 @@ export const Border = (
     type: BorderType,
     borderColor: BorderName | ButtonName
 ): BorderConfig => {
+
     const border = borderCustom.find(
         item => borderColor.includes(item.name)
     );
@@ -21,34 +22,38 @@ export const Border = (
         borders[borderColor as BorderName] : 
         buttons[borderColor as ButtonName];
     
+    const borderSlice = type === "borders" ?
+        "12%": "20%"
+
     return {
         className: `
         ${
             type === "buttons"
             ? `
-            button-hover
-            appearance-none
-            pb-1
-            text-sm
-            [border:8px_solid_transparent]
-            focus:outline-none
-            drop-shadow-md/40
-            rounded-3xl
-            focus:ring-0
-            text-white
-            text-center
+                button-hover
+                appearance-none
+                pb-1
+                text-sm
+                [border:8px_solid_transparent]
+                focus:outline-none
+                drop-shadow-md/40
+                rounded-3xl
+                focus:ring-0
+                text-white
+                text-center
             `
             : `
-            [border:20px_solid_transparent]
-            rounded-xl
-            [background-clip:padding-box]
-            [image-rendering:pixelated]
+                appearance-none
+                [border:8px_solid_transparent]
+                rounded-md
+                [background-clip:padding-box]
+                [image-rendering:pixelated]
             `
         }
     `,
     style: {
         backgroundColor: border?.color ?? "transparent",
-        borderImage: `url(${src}) 20% stretch`,
+        borderImage: `url(${src}) ${borderSlice} stretch`,
     },
   };
 };

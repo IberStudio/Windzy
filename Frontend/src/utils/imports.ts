@@ -9,6 +9,11 @@ import cross from "../assets/icons/cross.png";
 import trashCan from "../assets/icons/trash-can.png";
 import mainIcon from "../assets/icons/icon.png";
 import minimize from "../assets/icons/minimize.png";
+import play from "../assets/icons/play.png";
+import pause from "../assets/icons/pause.png";
+import next from "../assets/icons/next.png";
+import previous from "../assets/icons/previous.png";
+import replay from "../assets/icons/replay.png";
 
 export const icons = {
     gear,
@@ -19,13 +24,16 @@ export const icons = {
     cross,
     trashCan,
     mainIcon,
-    minimize
+    minimize,
+    play,
+    pause,
+    next,
+    previous,
+    replay,
 } as const;
 
 
 import brownBorder from "../assets/borders/brown.png";
-import brownLight from "../assets/borders/brown-light.png";
-import brownDark from "../assets/borders/brown-dark.png";
 import green from "../assets/borders/green.png";
 import hover from "../assets/borders/hover.png";
 import red from "../assets/borders/red.png";
@@ -33,8 +41,6 @@ import whiteBorder from "../assets/borders/white.png";
 
 export const borders = {
     brownBorder,
-    brownLight,
-    brownDark,
     green,
     hover,
     red,

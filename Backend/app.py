@@ -4,6 +4,7 @@ from flask_cors import CORS
 from config import Config
 from extensions import db
 from routes.tasks import tasks_bp
+from routes.music import stream_bp
 
 def create_app():
     app = Flask(__name__)
@@ -14,6 +15,7 @@ def create_app():
     db.init_app(app)
 
     app.register_blueprint(tasks_bp)
+    app.register_blueprint(stream_bp)
 
     with app.app_context():
         db.create_all()

@@ -36,7 +36,7 @@ export const postData = <T>(
 
 export const putData = <T>(
     endpoint: Endpoint,
-    id: number,
+    id: number | string,
     body: unknown
 ): Promise<T> => {
     return request<T>(`${endpoint}/${id}` as Endpoint, {

@@ -1,10 +1,14 @@
 import { navIcons } from '../constants/icons'
 import Button from '../components/Button'
+import { Border } from '../components/Border'
 
 const Navbar = () => {
+
+  const border = Border("borders", "brownBorder")
   return (
     <nav
-      className="navbar border- z-50 h-fit"
+      className={`navbar ${border.className} z-50 h-fit`}
+      style={border.style}
     >
       {navIcons.map((icon) => (
         <Button

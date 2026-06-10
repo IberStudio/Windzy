@@ -29,6 +29,7 @@ function startPython() {
     console.error(`Python Error: ${data}`)
   })
 }
+
 function createWindow() {
     const { height } = screen.getPrimaryDisplay().workAreaSize;
     const win = new BrowserWindow({
@@ -44,16 +45,19 @@ function createWindow() {
         transparent: true,
         resizable: false,
         webPreferences: {
+          nodeIntegration: false,
           contextIsolation: true,
           preload: path.join(__dirname, 'preload.js') // ← same folder as main.js
         }
     })
 
-    // win.webContents.openDevTools({mode: 'detach'})
-    win.setIgnoreMouseEvents(true, { forward: true })
-    win.loadFile('../Frontend/dist/index.html')
+    
+  win.webContents.openDevTools({mode: 'detach'})
+  win.setIgnoreMouseEvents(true, { forward: true })
+  win.loadURL('http://localhost:5173')
+  // win.loadFile('../Frontend/dist/index.html')
 }
-
+  
 ipcMain.on('set-ignore-mouse-events', (event, ignore) => {
   const win = BrowserWindow.fromWebContents(event.sender)
   win.setIgnoreMouseEvents(ignore, { forward: true })

@@ -1,19 +1,23 @@
-import Worklist from "./Worklist";
+import Tasks from "./Tasks";
 import Profile from "./Profile";
 import Settings from "./Settings";
 import Shop from "./Shop";
+import Home from "./Home";
+import Music from "./Music";
 
 
 type MainProps = {
-    page: "worklist" | "profile" | "settings" | "shop";
+    page: "home" | "tasks" | "profile" | "settings" | "shop" | "music";
 }
 
 const Main = ({ page }: MainProps) => {
     const pages = {
-        worklist: <Worklist />,
+        home: <Home />,
+        tasks: <Tasks />,
         profile: <Profile />,
         settings: <Settings />,
         shop: <Shop />,
+        music: <Music />
     };
 
     return (

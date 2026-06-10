@@ -16,5 +16,9 @@ export const borderCustom: BorderTypes[] = [
     {
         name: "white",
         color: "#dce0d2"
+    },
+    {
+        name: "brownDark",
+        color: "#b68962"
     }
 ]

@@ -7,6 +7,7 @@ import Main from './layout/Main'
 import TitleBar from './layout/TitleBar'
 import Navbar from './layout/Navbar'
 import './styles/globals.css'
+import Music from './layout/Music';
 
 gsap.registerPlugin(useGSAP);
 
@@ -53,7 +54,7 @@ return (
       }}
     >
       <Navbar />
-      <Main page='worklist' />
+      <Main page='music' />
     </div>
   </div>
   )

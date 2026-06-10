@@ -1,1 +1,1 @@
-export type Endpoint = "tasks" | "profile" | "settings"
+export type Endpoint = "tasks" | "profile" | "settings" | "stream"

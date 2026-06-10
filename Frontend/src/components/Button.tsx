@@ -15,8 +15,9 @@ const Button = ({ value, type, onClick }: ButtonProps) => {
     if (typeof value === "string") {
         return (
             <button 
-                className={`max-w-12 max-h-12 pb-1 ${Border("buttons", "brownButton").className}`} 
-                type={type} onClick={onClick}
+                className={`max-w-15 max-h-12 pb-1 ${Border("buttons", "brownButton").className}`} 
+                type={type} 
+                onClick={onClick}
                 style={Border("buttons", "brownButton").style}
                 onMouseEnter={(e) => e.currentTarget.classList.add('active')}
                 onMouseLeave={(e) => e.currentTarget.classList.remove('active')}
@@ -27,7 +28,7 @@ const Button = ({ value, type, onClick }: ButtonProps) => {
 
     return (
         <button 
-            className={`max-w-12 max-h-12 pb-1 ${Border("buttons", "brownButton").className}`} 
+            className={`max-w-15 max-h-12 pb-1 ${Border("buttons", "brownButton").className}`} 
             type={type} onClick={onClick}
             style={Border("buttons", "brownButton").style}
             onMouseEnter={(e) => e.currentTarget.classList.add('active')}
