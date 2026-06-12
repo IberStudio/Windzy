@@ -1,12 +1,12 @@
 const { app, BrowserWindow, screen, ipcMain } = require('electron')
 const { spawn, exec } = require('child_process')
 const path = require('path')
+const http = require('http')
 
 let pythonProcess = null
 
 function killPython() {
   if (pythonProcess) {
-    // Force kill on Windows
     exec(`taskkill /PID ${pythonProcess.pid} /T /F`, (err) => {
       if (err) console.error('Failed to kill Python:', err)
     })
@@ -15,11 +15,16 @@ function killPython() {
 }
 
 function startPython() {
-  // Point to venv python instead of global python
-  const pythonPath = path.join(__dirname, '../Backend/venv/Scripts/python.exe')
-  const scriptPath = path.join(__dirname, '../Backend/app.py')
-
-  pythonProcess = spawn(pythonPath, [scriptPath])
+  if (app.isPackaged) {
+    // ✅ production — run bundled exe
+    const exePath = path.join(process.resourcesPath, 'backend', 'app.exe')
+    pythonProcess = spawn(exePath)
+  } else {
+    // dev mode — use venv python
+    const pythonPath = path.join(__dirname, '../Backend/venv/Scripts/python.exe')
+    const scriptPath = path.join(__dirname, '../Backend/app.py')
+    pythonProcess = spawn(pythonPath, [scriptPath])
+  }
 
   pythonProcess.stdout.on('data', (data) => {
     console.log(`Python: ${data}`)
@@ -30,34 +35,44 @@ function startPython() {
   })
 }
 
-function createWindow() {
-    const { height } = screen.getPrimaryDisplay().workAreaSize;
-    const win = new BrowserWindow({
-        width: 360,
-        height: height,
-        x: 0,
-        y: 0,
-
-        icon: path.join(__dirname, 'assets', 'icon.ico'),
-
-        alwaysOnTop: true,
-        frame: false,
-        transparent: true,
-        resizable: false,
-        webPreferences: {
-          nodeIntegration: false,
-          contextIsolation: true,
-          preload: path.join(__dirname, 'preload.js') // ← same folder as main.js
-        }
-    })
-
-    
-  win.webContents.openDevTools({mode: 'detach'})
-  win.setIgnoreMouseEvents(true, { forward: true })
-  win.loadURL('http://localhost:5173')
-  // win.loadFile('../Frontend/dist/index.html')
+function waitForFlask(callback) {
+  http.get('http://localhost:5000', () => {
+    callback()
+  }).on('error', () => {
+    setTimeout(() => waitForFlask(callback), 500)
+  })
 }
-  
+
+function createWindow() {
+  const { height } = screen.getPrimaryDisplay().workAreaSize
+  const win = new BrowserWindow({
+    width: 360,
+    height: height,
+    x: 0,
+    y: 0,
+    icon: path.join(__dirname, 'assets', 'icon.ico'),
+    alwaysOnTop: true,
+    frame: false,
+    transparent: true,
+    resizable: false,
+    webPreferences: {
+      nodeIntegration: false,
+      contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js')
+    }
+  })
+
+  if (app.isPackaged) {
+    win.webContents.openDevTools({ mode: 'detach' }) // remove this line for final release
+    win.loadFile(path.join(process.resourcesPath, 'frontend', 'index.html'))
+  } else {
+    // win.webContents.openDevTools({ mode: 'detach' })
+    win.loadURL('http://localhost:5173')
+  }
+
+  win.setIgnoreMouseEvents(true, { forward: true })
+}
+
 ipcMain.on('set-ignore-mouse-events', (event, ignore) => {
   const win = BrowserWindow.fromWebContents(event.sender)
   win.setIgnoreMouseEvents(ignore, { forward: true })
@@ -69,12 +84,9 @@ ipcMain.on('close-window', () => {
 
 app.whenReady().then(() => {
   startPython()
-  setTimeout(() => {
-    createWindow()
-  }, 2000)
+  waitForFlask(() => createWindow()) // ✅ wait for Flask instead of fixed 2s timeout
 })
 
-// Kill Python when Electron closes
 app.on('window-all-closed', () => {
   killPython()
   app.quit()

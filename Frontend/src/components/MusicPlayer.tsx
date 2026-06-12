@@ -1,210 +1,103 @@
-import { useEffect, useRef, useState } from 'react'
+import { usePlayer } from '../context/PlayerContext'
 import { icons } from '../utils/imports'
 import Button from './Button'
-import type { TrackOutput } from '../types/trackOutput'
-import { putData } from '../utils/fetch'
 
+const MusicPlayer = ({ home }: { home: boolean }) => {
+    const {
+        currentTrack,
+        nextTrack,
+        isPlaying,
+        currentTime,
+        duration,
+        togglePlay,
+        playNext,
+        playPrev,
+        handleSeek,
+    } = usePlayer();
 
-const MusicPlayer = ({videoId}: {videoId: string}) => {
+    const format = (secs: number) => {
+        const m = Math.floor(secs / 60);
+        const s = Math.floor(secs % 60);
+        return `${m}:${s.toString().padStart(2, '0')}`;
+    };
 
-    const API_BASE = 'http://localhost:5000/api';
-    
-    const player = useRef<HTMLAudioElement>(null)
-    const [currentIndex, setCurrentIndex] = useState<number>(0);
-    const [currentTrack, setCurrentTrack] = useState<TrackOutput>();
-    const [nextTrack, setNextTrack] = useState<TrackOutput>();
-    const [queueTrack, setQueueTrack] = useState<string[]>([]);
-
-    const [isPlaying, setIsPlaying] = useState(false);
-
-    async function loadQueue(videoID: string) {
-        if (!videoID) return;
-
-        type RelatedResponse = {
-            related: string[]; // array of video IDs
-        };
-
-        const data= await putData<RelatedResponse>('stream', `related`, {
-            videoId: videoID
-        });
-        const mergedQueue = [videoID, ...data.related]
-        setQueueTrack(mergedQueue);
-        setCurrentIndex(0)
-    }
-
-    async function trackInfo(videoID: string, current: boolean) {
-        if (!videoID) return;
-        const data: TrackOutput = await putData<TrackOutput>('stream', `info`, {
-            id: videoID
-        });
-        if (current) {
-            setCurrentTrack(data)
-        } else {
-            return data
-        };
-    }
-
-    async function queueInfo(id: string) {
-        if (!id) return;
-        const data = await trackInfo(id, false);
-        setNextTrack(data)
-    }
-
-    useEffect(() => {
-        if (!videoId) return;
-        loadQueue(videoId);
-    }, [videoId])
-
-    useEffect(() => {
-        if (currentIndex === null || queueTrack.length === 0 || !player.current) return;
-
-        if (currentIndex >= queueTrack.length - 1) {
-            loadQueue(queueTrack[queueTrack.length - 1]);
-            setCurrentIndex(0);
-        };
-
-        trackInfo(queueTrack[currentIndex], true);
-        queueInfo(queueTrack[currentIndex + 1]);
-
-        const audio = player.current;
-        audio.pause();
-        audio.src = `${API_BASE}/stream/play/${queueTrack[currentIndex]}`;
-        audio.load();
-        audio.oncanplay = () => {
-        audio.play().catch((err) => {
-            if (err.name !== 'AbortError') console.error(err);
-        });
-        };
-    }, [currentIndex, queueTrack]);
-
-    // audio event listeners
-    useEffect(() => {
-        const audio = player.current;
-        if (!audio) return;
-
-        const onPlay  = () => setIsPlaying(true);
-        const onPause = () => setIsPlaying(false);
-        const onEnded = () => {
-        setCurrentIndex((prev) =>
-            prev !== null && prev < queueTrack.length - 1 ? prev + 1 : prev
+    if (home) {
+        return (
+            <div className='relative w-full flex flex-row justify-between items-center gap-3 px-2'>
+                <div className='size-28 shrink-0 border-2 border-white rounded-xl overflow-hidden'>
+                    <img className='w-full h-full object-cover' src={currentTrack?.thumbnail} alt={currentTrack?.title} />
+                </div>
+                <div className='min-w-0 flex flex-col gap-1 flex-1'>
+                    <div className='px-4'>
+                        <p className='text-md truncate'>{currentTrack?.title || 'No Track Selected'}</p>
+                        <p className='text-sm truncate'>{currentTrack?.songWriter || ''}</p>
+                    </div>
+                    <div className='px-4 flex flex-col gap-1'>
+                        <input
+                            type="range"
+                            min={0}
+                            max={duration || 0}
+                            value={currentTime}
+                            onChange={(e) => handleSeek(Number(e.target.value))}
+                            className='w-full accent-white cursor-pointer'
+                        />
+                        <div className='flex justify-between text-xs text-gray-700'>
+                            <span>{format(currentTime)}</span>
+                            <span>{format(duration)}</span>
+                        </div>
+                    </div>
+                    <div className="flex flex-row justify-evenly items-center px-4 gap-4">
+                        <Button value={{ name: "Previous", url: icons.previous }} type="button" onClick={playPrev} />
+                        <Button value={{ name: "Play", url: isPlaying ? icons.pause : icons.play }} type="button" onClick={togglePlay} />
+                        <Button value={{ name: "Next", url: icons.next }} type="button" onClick={playNext} />
+                    </div>
+                </div>
+            </div>
         );
-        };
-
-        audio.addEventListener('play', onPlay);
-        audio.addEventListener('pause', onPause);
-        audio.addEventListener('ended', onEnded);
-
-        return () => {
-        audio.removeEventListener('play', onPlay);
-        audio.removeEventListener('pause', onPause);
-        audio.removeEventListener('ended', onEnded);
-        };
-    }, [queueTrack]);
-
-    function togglePlay() {
-        if (!player.current || queueTrack.length === 0) return;
-        isPlaying ? player.current.pause() : player.current.play();
-        console.log(queueInfo(queueTrack[currentIndex + 1]));
-    }
-
-   async function playNext() {
-        if (currentIndex === null) return;
-        if (currentIndex < queueTrack.length - 1) {
-            setCurrentIndex(currentIndex + 1);
-            trackInfo(queueTrack[currentIndex + 1], true);
-        };
-    }
-
-    function playPrev() {
-        if (currentIndex === null) return;
-        if (player.current && player.current.currentTime > 3) {
-            player.current.currentTime = 0;
-        } else if (currentIndex > 0) {
-            setCurrentIndex(currentIndex - 1);
-        }
     }
 
     return (
-        <div 
-        className='flex flex-col justify-center items-center gap-4 px-8'
-        >
-            {/* Audio */}
-            <audio 
-            ref={player}
+        <div className='flex flex-col justify-center items-center gap-1 px-8'>
+            <img
+                className='w-60 h-60 rounded-xl border-2 border-white object-cover'
+                src={currentTrack?.thumbnail}
+                alt={currentTrack?.title}
             />
-            {/* Thumbnail */}
-            <img 
-            className='w-60 h-60 rounded-xl'
-            src={currentTrack?.thumbnail} 
-            alt={currentTrack?.title} 
-            />
-            {/* Info */}
-            <div
-            className='flex flex-col w-full'
-            >
-                <div>
-                    <p
-                    className='text-md'
-                    >{currentTrack?.title}</p>
-                    <p
-                    className='text-sm'
-                    >{currentTrack?.songWriter}</p>
+            <div className='flex flex-col w-full'>
+                <p className='text-md line-clamp-2'>{currentTrack?.title || 'No Track Selected'}</p>
+                <p className='text-sm line-clamp-1'>{currentTrack?.songWriter || ''}</p>
+            </div>
+
+            <div className='w-full flex flex-col gap-1'>
+                <input
+                    type="range"
+                    min={0}
+                    max={duration || 0}
+                    value={currentTime}
+                    onChange={(e) => handleSeek(Number(e.target.value))}
+                    className='w-full accent-white cursor-pointer'
+                />
+                <div className='flex justify-between text-xs text-gray-700'>
+                    <span>{format(currentTime)}</span>
+                    <span>{format(duration)}</span>
                 </div>
             </div>
-            {/* Buttons */}
-            <div 
-                className="flex flex-row justify-between items-center px-4 gap-4"
-                >
-                    <Button
-                        value={{
-                            name: "Previous",
-                            url: icons.previous
-                        }}
-                        type="button"
-                        onClick={playPrev}
-                    />
-                    <Button
-                        value={{
-                            name: "Play",
-                            url: isPlaying ? icons.pause: icons.play
-                        }}
-                        type="button"
-                        onClick={togglePlay}
-                    />
-                    <Button
-                        value={{
-                            name: "Next",
-                            url: icons.next
-                        }}
-                        type="button"
-                        onClick={playNext}
-                    />
 
+            <div className="flex flex-row justify-between items-center px-4 gap-4">
+                <Button value={{ name: "Previous", url: icons.previous }} type="button" onClick={playPrev} />
+                <Button value={{ name: "Play", url: isPlaying ? icons.pause : icons.play }} type="button" onClick={togglePlay} />
+                <Button value={{ name: "Next", url: icons.next }} type="button" onClick={playNext} />
             </div>
-            {/* Queue */}
-            <div
-            className='w-full flex flex-row justify-between mt-6'
-            >
-                <Button 
-                    value={{
-                        name: "Replay",
-                        url: icons.replay
-                    }}
-                    type= "button"
-                />
-                <div
-                className='flex flex-row justify-center gap-4'
-                >
-                    <p className='text-sm' >Queue:</p>
-                    <img 
-                    className='w-12 h-12 rounded-xl'
-                    src={nextTrack?.thumbnail}
-                    alt="" 
-                    />
+
+            <div className='w-full flex flex-row justify-between mt-4'>
+                <Button value={{ name: "Replay", url: icons.replay }} type="button" />
+                <div className='flex flex-row justify-center gap-4'>
+                    <p className='text-sm'>Queue:</p>
+                    <img className='w-12 h-12 rounded-xl border-2 border-white object-cover' src={nextTrack?.thumbnail} alt="" />
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default MusicPlayer
+export default MusicPlayer;

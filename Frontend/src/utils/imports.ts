@@ -14,6 +14,9 @@ import pause from "../assets/icons/pause.png";
 import next from "../assets/icons/next.png";
 import previous from "../assets/icons/previous.png";
 import replay from "../assets/icons/replay.png";
+import music from "../assets/icons/music.png";
+import upArrow from "../assets/icons/up-arrow.png";
+import downArrow from "../assets/icons/down-arrow.png";
 
 export const icons = {
     gear,
@@ -30,6 +33,9 @@ export const icons = {
     next,
     previous,
     replay,
+    music,
+    upArrow,
+    downArrow,
 } as const;
 
 

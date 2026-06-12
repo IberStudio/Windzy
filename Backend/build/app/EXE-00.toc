@@ -1,0 +1,698 @@
+('D:\\Study\\Todo Pet UI\\backend\\dist\\app.exe',
+ True,
+ False,
+ False,
+ 'D:\\Study\\Todo Pet '
+ 'UI\\backend\\venv\\Lib\\site-packages\\PyInstaller\\bootloader\\images\\icon-console.ico',
+ None,
+ False,
+ False,
+ b'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<assembly xmlns='
+ b'"urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">\n  <trustInfo x'
+ b'mlns="urn:schemas-microsoft-com:asm.v3">\n    <security>\n      <requested'
+ b'Privileges>\n        <requestedExecutionLevel level="asInvoker" uiAccess='
+ b'"false"/>\n      </requestedPrivileges>\n    </security>\n  </trustInfo>\n  '
+ b'<compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">\n    <'
+ b'application>\n      <supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f'
+ b'0}"/>\n      <supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}"/>\n '
+ b'     <supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}"/>\n      <s'
+ b'upportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}"/>\n      <supporte'
+ b'dOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}"/>\n    </application>\n  <'
+ b'/compatibility>\n  <application xmlns="urn:schemas-microsoft-com:asm.v3">'
+ b'\n    <windowsSettings>\n      <longPathAware xmlns="http://schemas.micros'
+ b'oft.com/SMI/2016/WindowsSettings">true</longPathAware>\n    </windowsSett'
+ b'ings>\n  </application>\n  <dependency>\n    <dependentAssembly>\n      <ass'
+ b'emblyIdentity type="win32" name="Microsoft.Windows.Common-Controls" version='
+ b'"6.0.0.0" processorArchitecture="*" publicKeyToken="6595b64144ccf1df" langua'
+ b'ge="*"/>\n    </dependentAssembly>\n  </dependency>\n</assembly>',
+ True,
+ False,
+ None,
+ None,
+ None,
+ 'D:\\Study\\Todo Pet UI\\backend\\build\\app\\app.pkg',
+ [('pyi-contents-directory _internal', '', 'OPTION'),
+  ('PYZ-00.pyz',
+   'D:\\Study\\Todo Pet UI\\backend\\build\\app\\PYZ-00.pyz',
+   'PYZ'),
+  ('struct',
+   'D:\\Study\\Todo Pet UI\\backend\\build\\app\\localpycs\\struct.pyc',
+   'PYMODULE'),
+  ('pyimod01_archive',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\build\\app\\localpycs\\pyimod01_archive.pyc',
+   'PYMODULE'),
+  ('pyimod02_importers',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\build\\app\\localpycs\\pyimod02_importers.pyc',
+   'PYMODULE'),
+  ('pyimod03_ctypes',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\build\\app\\localpycs\\pyimod03_ctypes.pyc',
+   'PYMODULE'),
+  ('pyimod04_pywin32',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\build\\app\\localpycs\\pyimod04_pywin32.pyc',
+   'PYMODULE'),
+  ('pyiboot01_bootstrap',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\PyInstaller\\loader\\pyiboot01_bootstrap.py',
+   'PYSOURCE'),
+  ('pyi_rth_inspect',
+   'D:\\Study\\Todo Pet '
+   'UI\\Backend\\venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_inspect.py',
+   'PYSOURCE'),
+  ('pyi_rth_pkgutil',
+   'D:\\Study\\Todo Pet '
+   'UI\\Backend\\venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pkgutil.py',
+   'PYSOURCE'),
+  ('pyi_rth_multiprocessing',
+   'D:\\Study\\Todo Pet '
+   'UI\\Backend\\venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_multiprocessing.py',
+   'PYSOURCE'),
+  ('pyi_rth_setuptools',
+   'D:\\Study\\Todo Pet '
+   'UI\\Backend\\venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_setuptools.py',
+   'PYSOURCE'),
+  ('app', 'D:\\Study\\Todo Pet UI\\Backend\\app.py', 'PYSOURCE'),
+  ('python312.dll',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\python312.dll',
+   'BINARY'),
+  ('unicodedata.pyd',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\unicodedata.pyd',
+   'EXTENSION'),
+  ('_lzma.pyd',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_lzma.pyd',
+   'EXTENSION'),
+  ('_bz2.pyd',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_bz2.pyd',
+   'EXTENSION'),
+  ('_decimal.pyd',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_decimal.pyd',
+   'EXTENSION'),
+  ('_hashlib.pyd',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_hashlib.pyd',
+   'EXTENSION'),
+  ('select.pyd',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\select.pyd',
+   'EXTENSION'),
+  ('_socket.pyd',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_socket.pyd',
+   'EXTENSION'),
+  ('_overlapped.pyd',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_overlapped.pyd',
+   'EXTENSION'),
+  ('_ssl.pyd',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_ssl.pyd',
+   'EXTENSION'),
+  ('_queue.pyd',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_queue.pyd',
+   'EXTENSION'),
+  ('_ctypes.pyd',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_ctypes.pyd',
+   'EXTENSION'),
+  ('_multiprocessing.pyd',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_multiprocessing.pyd',
+   'EXTENSION'),
+  ('pyexpat.pyd',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\pyexpat.pyd',
+   'EXTENSION'),
+  ('_asyncio.pyd',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_asyncio.pyd',
+   'EXTENSION'),
+  ('_wmi.pyd',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_wmi.pyd',
+   'EXTENSION'),
+  ('81d243bd2c585b0f4821__mypyc.cp312-win_amd64.pyd',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\81d243bd2c585b0f4821__mypyc.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('charset_normalizer\\cd.cp312-win_amd64.pyd',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\charset_normalizer\\cd.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('charset_normalizer\\md.cp312-win_amd64.pyd',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\charset_normalizer\\md.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('_sqlite3.pyd',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_sqlite3.pyd',
+   'EXTENSION'),
+  ('_elementtree.pyd',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_elementtree.pyd',
+   'EXTENSION'),
+  ('_uuid.pyd',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_uuid.pyd',
+   'EXTENSION'),
+  ('sqlalchemy\\cyextension\\util.cp312-win_amd64.pyd',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\sqlalchemy\\cyextension\\util.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('sqlalchemy\\cyextension\\resultproxy.cp312-win_amd64.pyd',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\sqlalchemy\\cyextension\\resultproxy.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('sqlalchemy\\cyextension\\processors.cp312-win_amd64.pyd',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\sqlalchemy\\cyextension\\processors.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('sqlalchemy\\cyextension\\immutabledict.cp312-win_amd64.pyd',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\sqlalchemy\\cyextension\\immutabledict.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('sqlalchemy\\cyextension\\collections.cp312-win_amd64.pyd',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\sqlalchemy\\cyextension\\collections.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('greenlet\\_greenlet.cp312-win_amd64.pyd',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\greenlet\\_greenlet.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('markupsafe\\_speedups.cp312-win_amd64.pyd',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\markupsafe\\_speedups.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('api-ms-win-crt-runtime-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-crt-runtime-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-time-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-crt-time-l1-1-0.dll',
+   'BINARY'),
+  ('VCRUNTIME140.dll',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\VCRUNTIME140.dll',
+   'BINARY'),
+  ('api-ms-win-crt-string-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-crt-string-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-environment-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-crt-environment-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-process-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-crt-process-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-stdio-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-crt-stdio-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-heap-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-crt-heap-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-math-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-crt-math-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-conio-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-crt-conio-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-convert-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-crt-convert-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-filesystem-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-crt-filesystem-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-locale-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-crt-locale-l1-1-0.dll',
+   'BINARY'),
+  ('libcrypto-3.dll',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\libcrypto-3.dll',
+   'BINARY'),
+  ('libssl-3.dll',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\libssl-3.dll',
+   'BINARY'),
+  ('libffi-8.dll',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\libffi-8.dll',
+   'BINARY'),
+  ('api-ms-win-crt-utility-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-crt-utility-l1-1-0.dll',
+   'BINARY'),
+  ('VCRUNTIME140_1.dll',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\VCRUNTIME140_1.dll',
+   'BINARY'),
+  ('sqlite3.dll',
+   'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\sqlite3.dll',
+   'BINARY'),
+  ('MSVCP140.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\MSVCP140.dll',
+   'BINARY'),
+  ('ucrtbase.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\ucrtbase.dll',
+   'BINARY'),
+  ('api-ms-win-core-libraryloader-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-libraryloader-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-util-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-util-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-sysinfo-l1-2-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-sysinfo-l1-2-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-rtlsupport-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-rtlsupport-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-kernel32-legacy-l1-1-1.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-kernel32-legacy-l1-1-1.dll',
+   'BINARY'),
+  ('api-ms-win-core-interlocked-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-interlocked-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-errorhandling-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-errorhandling-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-namedpipe-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-namedpipe-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-synch-l1-2-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-synch-l1-2-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-timezone-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-timezone-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-processthreads-l1-1-1.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-processthreads-l1-1-1.dll',
+   'BINARY'),
+  ('api-ms-win-core-datetime-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-datetime-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-fibers-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-fibers-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-processenvironment-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-processenvironment-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-string-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-string-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-file-l1-2-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-file-l1-2-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-handle-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-handle-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-memory-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-memory-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-file-l2-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-file-l2-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-file-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-file-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-fibers-l1-1-1.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-fibers-l1-1-1.dll',
+   'BINARY'),
+  ('api-ms-win-core-heap-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-heap-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-sysinfo-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-sysinfo-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-debug-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-debug-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-profile-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-profile-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-localization-l1-2-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-localization-l1-2-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-synch-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-synch-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-console-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-console-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-processthreads-l1-1-0.dll',
+   'C:\\Program Files\\Eclipse '
+   'Adoptium\\jdk-17.0.17.10-hotspot\\bin\\api-ms-win-core-processthreads-l1-1-0.dll',
+   'BINARY'),
+  ('config.py', 'D:\\Study\\Todo Pet UI\\backend\\config.py', 'DATA'),
+  ('extensions.py', 'D:\\Study\\Todo Pet UI\\backend\\extensions.py', 'DATA'),
+  ('models\\__pycache__\\music.cpython-312.pyc',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\models\\__pycache__\\music.cpython-312.pyc',
+   'DATA'),
+  ('models\\__pycache__\\music_models.cpython-312.pyc',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\models\\__pycache__\\music_models.cpython-312.pyc',
+   'DATA'),
+  ('models\\__pycache__\\task.cpython-312.pyc',
+   'D:\\Study\\Todo Pet UI\\backend\\models\\__pycache__\\task.cpython-312.pyc',
+   'DATA'),
+  ('models\\music_models.py',
+   'D:\\Study\\Todo Pet UI\\backend\\models\\music_models.py',
+   'DATA'),
+  ('models\\task.py',
+   'D:\\Study\\Todo Pet UI\\backend\\models\\task.py',
+   'DATA'),
+  ('routes\\__pycache__\\music.cpython-312.pyc',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\routes\\__pycache__\\music.cpython-312.pyc',
+   'DATA'),
+  ('routes\\__pycache__\\tasks.cpython-312.pyc',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\routes\\__pycache__\\tasks.cpython-312.pyc',
+   'DATA'),
+  ('routes\\music.py',
+   'D:\\Study\\Todo Pet UI\\backend\\routes\\music.py',
+   'DATA'),
+  ('routes\\tasks.py',
+   'D:\\Study\\Todo Pet UI\\backend\\routes\\tasks.py',
+   'DATA'),
+  ('ytmusicapi\\locales\\README.rst',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi\\locales\\README.rst',
+   'DATA'),
+  ('ytmusicapi\\locales\\ar\\LC_MESSAGES\\base.mo',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi\\locales\\ar\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\cs\\LC_MESSAGES\\base.mo',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi\\locales\\cs\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\de\\LC_MESSAGES\\base.mo',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi\\locales\\de\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\en\\LC_MESSAGES\\base.mo',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi\\locales\\en\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\es\\LC_MESSAGES\\base.mo',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi\\locales\\es\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\fr\\LC_MESSAGES\\base.mo',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi\\locales\\fr\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\hi\\LC_MESSAGES\\base.mo',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi\\locales\\hi\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\it\\LC_MESSAGES\\base.mo',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi\\locales\\it\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\ja\\LC_MESSAGES\\base.mo',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi\\locales\\ja\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\ko\\LC_MESSAGES\\base.mo',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi\\locales\\ko\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\nl\\LC_MESSAGES\\base.mo',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi\\locales\\nl\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\pt\\LC_MESSAGES\\base.mo',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi\\locales\\pt\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\ru\\LC_MESSAGES\\base.mo',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi\\locales\\ru\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\tr\\LC_MESSAGES\\base.mo',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi\\locales\\tr\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\ur\\LC_MESSAGES\\base.mo',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi\\locales\\ur\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\zh_CN\\LC_MESSAGES\\base.mo',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi\\locales\\zh_CN\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\zh_TW\\LC_MESSAGES\\base.mo',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi\\locales\\zh_TW\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\py.typed',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi\\py.typed',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\METADATA',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\METADATA',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\top_level.txt',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\top_level.txt',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\licenses\\LICENSE',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\WHEEL',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\WHEEL',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\INSTALLER',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\INSTALLER',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\RECORD',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\RECORD',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\REQUESTED',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\REQUESTED',
+   'DATA'),
+  ('setuptools\\_vendor\\jaraco\\text\\Lorem ipsum.txt',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\setuptools\\_vendor\\jaraco\\text\\Lorem '
+   'ipsum.txt',
+   'DATA'),
+  ('certifi\\py.typed',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\certifi\\py.typed',
+   'DATA'),
+  ('certifi\\cacert.pem',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\certifi\\cacert.pem',
+   'DATA'),
+  ('werkzeug-3.1.8.dist-info\\METADATA',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\werkzeug-3.1.8.dist-info\\METADATA',
+   'DATA'),
+  ('werkzeug-3.1.8.dist-info\\RECORD',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\werkzeug-3.1.8.dist-info\\RECORD',
+   'DATA'),
+  ('itsdangerous-2.2.0.dist-info\\WHEEL',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\itsdangerous-2.2.0.dist-info\\WHEEL',
+   'DATA'),
+  ('flask_sqlalchemy-3.1.1.dist-info\\REQUESTED',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\flask_sqlalchemy-3.1.1.dist-info\\REQUESTED',
+   'DATA'),
+  ('werkzeug-3.1.8.dist-info\\INSTALLER',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\werkzeug-3.1.8.dist-info\\INSTALLER',
+   'DATA'),
+  ('flask_sqlalchemy-3.1.1.dist-info\\INSTALLER',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\flask_sqlalchemy-3.1.1.dist-info\\INSTALLER',
+   'DATA'),
+  ('ytmusicapi-1.12.1.dist-info\\licenses\\LICENSE',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi-1.12.1.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\INSTALLER',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\INSTALLER',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\top_level.txt',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\top_level.txt',
+   'DATA'),
+  ('itsdangerous-2.2.0.dist-info\\LICENSE.txt',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\itsdangerous-2.2.0.dist-info\\LICENSE.txt',
+   'DATA'),
+  ('ytmusicapi-1.12.1.dist-info\\entry_points.txt',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi-1.12.1.dist-info\\entry_points.txt',
+   'DATA'),
+  ('ytmusicapi-1.12.1.dist-info\\top_level.txt',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi-1.12.1.dist-info\\top_level.txt',
+   'DATA'),
+  ('itsdangerous-2.2.0.dist-info\\INSTALLER',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\itsdangerous-2.2.0.dist-info\\INSTALLER',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\RECORD',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\RECORD',
+   'DATA'),
+  ('ytmusicapi-1.12.1.dist-info\\INSTALLER',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi-1.12.1.dist-info\\INSTALLER',
+   'DATA'),
+  ('werkzeug-3.1.8.dist-info\\WHEEL',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\werkzeug-3.1.8.dist-info\\WHEEL',
+   'DATA'),
+  ('ytmusicapi-1.12.1.dist-info\\REQUESTED',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi-1.12.1.dist-info\\REQUESTED',
+   'DATA'),
+  ('flask_sqlalchemy-3.1.1.dist-info\\LICENSE.rst',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\flask_sqlalchemy-3.1.1.dist-info\\LICENSE.rst',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\licenses\\LICENSE.txt',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\licenses\\LICENSE.txt',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\entry_points.txt',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\entry_points.txt',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\METADATA',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\METADATA',
+   'DATA'),
+  ('itsdangerous-2.2.0.dist-info\\METADATA',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\itsdangerous-2.2.0.dist-info\\METADATA',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\WHEEL',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\WHEEL',
+   'DATA'),
+  ('ytmusicapi-1.12.1.dist-info\\METADATA',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi-1.12.1.dist-info\\METADATA',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\METADATA',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\METADATA',
+   'DATA'),
+  ('flask_sqlalchemy-3.1.1.dist-info\\METADATA',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\flask_sqlalchemy-3.1.1.dist-info\\METADATA',
+   'DATA'),
+  ('click-8.4.1.dist-info\\METADATA',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\click-8.4.1.dist-info\\METADATA',
+   'DATA'),
+  ('flask_sqlalchemy-3.1.1.dist-info\\RECORD',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\flask_sqlalchemy-3.1.1.dist-info\\RECORD',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\RECORD',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\RECORD',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\WHEEL',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\WHEEL',
+   'DATA'),
+  ('click-8.4.1.dist-info\\INSTALLER',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\click-8.4.1.dist-info\\INSTALLER',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\REQUESTED',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\REQUESTED',
+   'DATA'),
+  ('werkzeug-3.1.8.dist-info\\licenses\\LICENSE.txt',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\werkzeug-3.1.8.dist-info\\licenses\\LICENSE.txt',
+   'DATA'),
+  ('click-8.4.1.dist-info\\WHEEL',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\click-8.4.1.dist-info\\WHEEL',
+   'DATA'),
+  ('flask_sqlalchemy-3.1.1.dist-info\\WHEEL',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\flask_sqlalchemy-3.1.1.dist-info\\WHEEL',
+   'DATA'),
+  ('itsdangerous-2.2.0.dist-info\\RECORD',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\itsdangerous-2.2.0.dist-info\\RECORD',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\licenses\\LICENSE.txt',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\licenses\\LICENSE.txt',
+   'DATA'),
+  ('click-8.4.1.dist-info\\RECORD',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\click-8.4.1.dist-info\\RECORD',
+   'DATA'),
+  ('click-8.4.1.dist-info\\licenses\\LICENSE.txt',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\click-8.4.1.dist-info\\licenses\\LICENSE.txt',
+   'DATA'),
+  ('ytmusicapi-1.12.1.dist-info\\WHEEL',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi-1.12.1.dist-info\\WHEEL',
+   'DATA'),
+  ('ytmusicapi-1.12.1.dist-info\\RECORD',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\ytmusicapi-1.12.1.dist-info\\RECORD',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\INSTALLER',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\INSTALLER',
+   'DATA'),
+  ('base_library.zip',
+   'D:\\Study\\Todo Pet UI\\backend\\build\\app\\base_library.zip',
+   'DATA')],
+ [],
+ False,
+ False,
+ 1781247816,
+ [('run.exe',
+   'D:\\Study\\Todo Pet '
+   'UI\\backend\\venv\\Lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\run.exe',
+   'EXECUTABLE')],
+ 'C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\python312.dll')

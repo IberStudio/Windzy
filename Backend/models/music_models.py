@@ -1,4 +1,26 @@
-from extensions import ytmusic
+from extensions import ytmusic, db
+
+class Music(db.Model):
+    __tablename__ = "music"
+    id = db.Column(db.Integer, primary_key=True)
+    video_id = db.Column(db.String(255), nullable=False)
+    thumbnail = db.Column(db.String(255), nullable=False)
+    title = db.Column(db.String(255), nullable=False)
+    song_writer = db.Column(db.String(255), nullable=False)
+    duration = db.Column(db.Float, nullable=True)
+    current_time = db.Column(db.Float, nullable=True, default=0.0)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "videoId" : self.video_id,
+            "thumbnail" : self.thumbnail,
+            "title" : self.title,
+            "songWriter" : self.song_writer,
+            "duration" : self.duration,
+            "currentTime" : self.current_time,
+        }
+
 
 def get_info(id: str):
 
@@ -29,7 +51,6 @@ def get_result(query: str):
         return result
     except KeyError:
         return result
-
 
 def get_related(query: str):
     results = ytmusic.search(query, filter="songs")[0]

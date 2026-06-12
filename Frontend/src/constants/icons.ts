@@ -1,16 +1,17 @@
+import type { Pages } from "../types/pages";
 import { icons } from "../utils/imports";
 
 export const navIcons = [
     {
-        name: "Setting",
-        url: icons.gear
+        name: "home" as Pages,
+        url: icons.home
     },
     {
-        name: "Worklist",
+        name: "tasks" as Pages,
         url: icons.list
     },
     {
-        name: "Shop",
-        url: icons.shop
+        name: "music" as Pages,
+        url: icons.music
     }
 ]

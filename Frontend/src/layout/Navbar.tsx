@@ -1,10 +1,12 @@
 import { navIcons } from '../constants/icons'
 import Button from '../components/Button'
 import { Border } from '../components/Border'
+import type { Pages } from '../types/pages'
 
-const Navbar = () => {
+const Navbar = ({ onClick }: { onClick?: (value: Pages) => void }) => {
 
   const border = Border("borders", "brownBorder")
+
   return (
     <nav
       className={`navbar ${border.className} z-50 h-fit`}
@@ -15,6 +17,9 @@ const Navbar = () => {
           key={icon.name}
           value={{ name: icon.name, url: icon.url }}
           type="button"
+          onClick={() => {
+            onClick && onClick(icon.name)
+          }}
         />
       ))}
     </nav>
