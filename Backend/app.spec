@@ -11,17 +11,18 @@ a = Analysis(
         ('models', 'models'),
         ('routes', 'routes'),
     ] + collect_data_files('ytmusicapi'),
-    hiddenimports=[
-        'yt_dlp',
-        'flask_cors',
-        'ytmusicapi',
-    ],
+    hiddenimports=['yt_dlp', 'flask_cors', 'ytmusicapi'],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=[],
+    excludes=[
+        'matplotlib', 'numpy', 'pandas', 'scipy',  # if unused
+        'tkinter', 'test', 'unittest',
+        'PyQt5', 'PySide2',
+        'IPython', 'jupyter',
+    ],
     noarchive=False,
-    optimize=0,
+    optimize=2,  # ← strip docstrings/asserts
 )
 pyz = PYZ(a.pure)
 

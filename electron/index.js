@@ -63,10 +63,8 @@ function createWindow() {
   })
 
   if (app.isPackaged) {
-    win.webContents.openDevTools({ mode: 'detach' }) // remove this line for final release
     win.loadFile(path.join(process.resourcesPath, 'frontend', 'index.html'))
   } else {
-    // win.webContents.openDevTools({ mode: 'detach' })
     win.loadURL('http://localhost:5173')
   }
 
@@ -84,7 +82,7 @@ ipcMain.on('close-window', () => {
 
 app.whenReady().then(() => {
   startPython()
-  waitForFlask(() => createWindow()) // ✅ wait for Flask instead of fixed 2s timeout
+  waitForFlask(() => createWindow()) 
 })
 
 app.on('window-all-closed', () => {
