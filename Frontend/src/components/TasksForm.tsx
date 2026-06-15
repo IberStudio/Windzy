@@ -21,15 +21,16 @@ const TasksForm = ({ tasks, setTasks }: Props) => {
 
     const value = inputRef.current?.value?.trim();
     if (!value) return;
-
-    setIsLoading(true) 
     
+    setIsLoading(true)
+
     const exists = tasks.some(
       (task) => task.title.toLowerCase() === value.toLowerCase()
     );
     
     if (exists) {
       console.log("Task already exists");
+      setIsLoading(false)
       return;
     }
     
@@ -37,7 +38,8 @@ const TasksForm = ({ tasks, setTasks }: Props) => {
       title: value,
       completed: false,
     });
-    setIsLoading(true) 
+    
+    setIsLoading(false)
 
     setTasks((prev) => [...prev, created]);
 

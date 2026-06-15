@@ -1,7 +1,7 @@
 import requests
 from flask import Blueprint, Response, request, jsonify
-from extensions import ytdlp
-from models.music_models import get_result, get_related, get_info
+from extensions import ytdlp, db
+from models.music_models import Music, get_result, get_related, get_info
 
 stream_bp = Blueprint('stream', __name__, url_prefix='/api/stream')
 
@@ -66,3 +66,24 @@ def stream_audio(video_id: str):
     )
 
 
+@stream_bp.get('/last/')
+def get_last():
+    music = Music.query.get(1)
+    if not music:
+        return jsonify({"videoId": None}), 404
+    return jsonify(music.to_dict())
+
+@stream_bp.put('/last/<int:id>')
+def save_last_video(id):
+    data = request.get_json()
+    video_id = data.get('videoId')
+    
+    music = Music.query.get(1)
+    if not music:
+        music = Music(id=id, video_id=video_id)
+        db.session.add(music)
+    else:
+        music.video_id = video_id
+    
+    db.session.commit()
+    return jsonify(music.to_dict())

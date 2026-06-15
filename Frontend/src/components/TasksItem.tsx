@@ -53,7 +53,7 @@ const TaskItemContainer = ({ tasks = [], setTasks }: Props) => {
   const handleDelete = async (id: number) => {
     setIsLoading(true)
     await deleteData("tasks", id);
-    setIsLoading(true)
+    setIsLoading(false)
     setTasks((prev) => prev.filter((task) => task.id !== id));
   };
 

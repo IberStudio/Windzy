@@ -2,7 +2,7 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import type { TrackOutput } from '../types/track'
-import { putData } from '../utils/fetch'
+import { getData, putData } from '../utils/fetch'
 import { useLoading } from './LoadingContext';
 
 const API_BASE = 'http://localhost:5000/api';
@@ -36,19 +36,19 @@ export const PlayerProvider = ({ children }: { children: ReactNode }) => {
     const [duration, setDuration] = useState<number>(0);
     const [videoId, setVideoIdState] = useState<string>('');
 
-    const {setIsLoading} = useLoading()
+    const { setIsLoading } = useLoading();
 
     async function loadQueue(videoID: string) {
         if (!videoID) return;
-        setIsLoading(true)
+        setIsLoading(true);
         type RelatedResponse = { related: string[] };
         const data = await putData<RelatedResponse>('stream', `related`, { videoId: videoID });
         const mergedQueue = [videoID, ...data.related];
-        setIsLoading(false)
+        setIsLoading(false);
         setQueueTrack(mergedQueue);
         setCurrentIndex(0);
     }
-    
+
     async function trackInfo(videoID: string, current: boolean) {
         if (!videoID) return;
         const data: TrackOutput = await putData<TrackOutput>('stream', `info`, { id: videoID });
@@ -58,7 +58,7 @@ export const PlayerProvider = ({ children }: { children: ReactNode }) => {
             return data;
         }
     }
-    
+
     async function queueInfo(id: string) {
         if (!id) return;
         const data = await trackInfo(id, false);
@@ -72,6 +72,26 @@ export const PlayerProvider = ({ children }: { children: ReactNode }) => {
     }
 
     useEffect(() => {
+        async function loadLastVideo() {
+            try {
+                const data = await getData<{ videoId: string }>('stream/last' as any);
+                if (data?.videoId) {
+                    setVideoIdState(data.videoId);
+                    loadQueue(data.videoId);
+                }
+            } catch (err) {
+                console.error('no last video found', err);
+            }
+        }
+        loadLastVideo();
+    }, []);
+
+    useEffect(() => {
+        if (!videoId) return;
+        putData('stream/last' as any, 1 as number, { videoId: videoId }).catch(console.error);
+    }, [videoId]);
+
+    useEffect(() => {
         if (currentIndex === null || queueTrack.length === 0 || !player.current) return;
 
         if (currentIndex >= queueTrack.length - 1) {
@@ -81,22 +101,22 @@ export const PlayerProvider = ({ children }: { children: ReactNode }) => {
 
         trackInfo(queueTrack[currentIndex], true);
         queueInfo(queueTrack[currentIndex + 1]);
-        
+
         const audio = player.current;
         audio.pause();
         audio.src = `${API_BASE}/stream/play/${queueTrack[currentIndex]}`;
-        setIsLoading(true)
+        setIsLoading(true);
         audio.load();
         audio.oncanplay = () => {
             audio.play().catch((err) => {
                 if (err.name !== 'AbortError') console.error(err);
             });
-            setIsLoading(false)
+            setIsLoading(false);
         };
-        
+
         audio.onerror = () => {
-            setIsLoading(false)
-        }
+            setIsLoading(false);
+        };
 
         setCurrentTime(0);
         setDuration(0);
