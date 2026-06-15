@@ -5,56 +5,48 @@ import { icons } from "../utils/imports"
 
 const Timer = () => {
 
-    const border = Border("borders", "brownBorder")
+    const border = Border("borders", "whiteBorder")
 
-    const WORK_MINUTES = 25;
-    const BREAK_MINUTES = 5;
+    const FOCUS_SECONDS = 25 * 60;
+    const BREAK_SECONDS = 5 * 60;
 
-    const [minutes, setMinutes] = useState(WORK_MINUTES);
-    const [seconds, setSeconds] = useState(0);
+    const [totalSeconds, setTotalSeconds] = useState(FOCUS_SECONDS);
     const [isRunning, setIsRunning] = useState(false);
     const [isBreak, setIsBreak] = useState(false);
 
-    const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+    const isBreakRef = useRef(isBreak);
 
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
     const format = (num: number) => num.toString().padStart(2, '0');
+
+    useEffect(() => {
+        isBreakRef.current = isBreak;
+    }, [isBreak]);
 
     useEffect(() => {
         if (!isRunning) return;
 
-        intervalRef.current = setInterval(() => {
-            setSeconds((prevSec) => {
-                if (prevSec === 0) {
-                    setMinutes((prevMin) => {
-                        if (prevMin === 0) {
-                            // switch mode
-                            const nextIsBreak = !isBreak;
-                            setIsBreak(nextIsBreak);
-                            return nextIsBreak ? BREAK_MINUTES : WORK_MINUTES;
-                        }
-                        return prevMin - 1;
-                    });
-                    return 59;
+        const intervalId = setInterval(() => {
+            setTotalSeconds((prev) => {
+                if (prev <= 0) {
+                    const nextIsBreak = !isBreakRef.current;
+                    setIsBreak(nextIsBreak);
+                    return nextIsBreak ? BREAK_SECONDS : FOCUS_SECONDS;
                 }
-                return prevSec - 1;
+                return prev - 1;
             });
         }, 1000);
 
-        return () => {
-            if (intervalRef.current) clearInterval(intervalRef.current);
-        };
-    }, [isRunning, isBreak]);
-
-    function toggleStart() {
-        setIsRunning((prev) => !prev);
-    }
+        return () => clearInterval(intervalId);
+    }, [isRunning]);
 
     function adjustMinutes(delta: number) {
-        if (isRunning) return; 
-        setMinutes((prev) => {
-            const next = prev + delta;
+        if (isRunning) return;
+        setTotalSeconds((prev) => {
+            const next = prev + delta * 60;
             if (next < 0) return 0;
-            if (next > 59) return 59;
+            if (next > 59 * 60) return 59 * 60;
             return next;
         });
     }
@@ -62,8 +54,18 @@ const Timer = () => {
     function reset() {
         setIsRunning(false);
         setIsBreak(false);
-        setMinutes(WORK_MINUTES);
-        setSeconds(0);
+        setTotalSeconds(FOCUS_SECONDS);
+    }
+
+    function switchMode() {
+        const toBreak = !isBreak;
+        setIsRunning(false);
+        setIsBreak(toBreak);
+        setTotalSeconds(toBreak ? BREAK_SECONDS : FOCUS_SECONDS);
+    }
+    
+    function toggleStart() {
+        setIsRunning((prev) => !prev);
     }
 
     return (
@@ -71,9 +73,6 @@ const Timer = () => {
         className={`${border.className} h-full flex flex-col items-center justify-center gap-4`}
         style={border.style}
         >
-            <p className="text-sm text-gray-700 uppercase tracking-widest">
-                {isBreak ? "Break" : "Focus"}
-            </p>
             <div
             className="flex flex-row justify-evenly items-center w-full"
             >
@@ -81,8 +80,46 @@ const Timer = () => {
                 className="flex flex-row items-center gap-2"
                 >
                     <div>
+                        <div
+                        className="w-full flex flex-row justify-around"
+                        >
+                            <button
+                            className={`${isBreak ? "text-gray-500" : "text-black"} group relative pb-1`}
+                            onClick={() => {isBreak && switchMode()}}
+                            >
+                                Focus
+                                <span
+                                    className={`
+                                    ${isBreak ? "" : "w-full" }
+                                    absolute bottom-0 left-1/2
+                                    h-0.5 w-0
+                                    -translate-x-1/2
+                                    bg-current
+                                    transition-all duration-300
+                                    group-hover:w-full
+                                    `}
+                                />
+                            </button>
+                            <button
+                            className={`${!isBreak ? "text-gray-500" : "text-black"} group relative pb-1`}
+                            onClick={() => {!isBreak && switchMode()}}
+                            >
+                                Break
+                                <span
+                                    className={`
+                                    ${isBreak ? "w-full" : ""}
+                                    absolute bottom-0 left-1/2
+                                    h-0.5 w-0
+                                    -translate-x-1/2
+                                    bg-current
+                                    transition-all duration-300
+                                    group-hover:w-full
+                                    `}
+                                />
+                            </button>
+                        </div>
                         <p 
-                        className="text-7xl text-white"
+                        className="text-7xl text-black"
                         >
                             {format(minutes)}:{format(seconds)}
                         </p>
@@ -97,6 +134,7 @@ const Timer = () => {
                         }} 
                         type="button"
                         onClick={() => adjustMinutes(1)}
+                        color="gray"
                         />
                         <Button 
                         value={{
@@ -105,6 +143,7 @@ const Timer = () => {
                         }}
                         type="button"
                         onClick={() => adjustMinutes(-1)}
+                        color="gray"
                         />
                     </div>
                 </div>
@@ -115,11 +154,13 @@ const Timer = () => {
                     value={isRunning ? "Pause" : "Start"} 
                     type="button"
                     onClick={toggleStart}
+                    color="gray"
                     />
                     <Button 
                     value="Reset" 
                     type="button"
                     onClick={reset}
+                    color="gray"
                     />
                 </div>
             </div>

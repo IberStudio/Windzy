@@ -11,14 +11,18 @@ export const borderCustom: BorderTypes[] = [
     },
     {
         name: "brown",
-        color: "#dcb98a"
+        color: "#e8cfa6"
+    },
+    {
+        name: "darkBrown",
+        color: "#c49a6c"
     },
     {
         name: "white",
         color: "#dce0d2"
     },
     {
-        name: "brownDark",
-        color: "#b68962"
+        name: "gray",
+        color: "#9c9c9c"
     }
 ]

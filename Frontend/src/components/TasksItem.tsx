@@ -3,6 +3,7 @@ import { deleteData, putData } from "../utils/fetch";
 import Button from "../components/Button";
 import { Border } from "../components/Border";
 import { icons } from "../utils/imports";
+import { useLoading } from "../context/LoadingContext";
 
 type Props = {
   tasks: Task[];
@@ -47,18 +48,22 @@ const TaskItem = ({
 
 const TaskItemContainer = ({ tasks = [], setTasks }: Props) => {
   const border = Border("borders", "brownBorder");
+  const {setIsLoading} = useLoading()
 
   const handleDelete = async (id: number) => {
+    setIsLoading(true)
     await deleteData("tasks", id);
+    setIsLoading(true)
     setTasks((prev) => prev.filter((task) => task.id !== id));
   };
 
   const handleComplete = async (id: number) => {
     const task = tasks.find((t) => t.id === id);
+    setIsLoading(true)
     if (!task) return;
-
     await putData("tasks", id, { completed: !task.completed });
-
+    
+    setIsLoading(false)
     setTasks((prev) =>
       prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
     );

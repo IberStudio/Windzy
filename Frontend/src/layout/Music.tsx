@@ -6,32 +6,41 @@ import MusicPlayer from '../components/MusicPlayer'
 import type { TrackOutput } from '../types/track'
 import { putData } from '../utils/fetch'
 import { usePlayer } from '../context/PlayerContext'
+import { useLoading } from '../context/LoadingContext'
 
 const Music = ({ home }: { home: boolean }) => {
+
     const border = Border("borders", "brownBorder")
+    const darkBorder = Border("borders", "grayBorder")
     const { setVideoId } = usePlayer();
 
     const inputRef = useRef<HTMLInputElement>(null);
     const [searchOutput, setSearchOutput] = useState<TrackOutput[]>([]);
 
+    const { setIsLoading } = useLoading();
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setIsLoading(true);
+
         const value = inputRef.current?.value?.trim();
         if (!value) return;
         const data = await putData<TrackOutput[]>('stream', `search`, { title: value });
+        
+        setIsLoading(false);
         setSearchOutput(data);
     }
 
     if (home) {
         return (
-            <div className={`${border.className} max-w-full h-full flex`} style={border.style}>
+            <div className={`${darkBorder.className} max-w-full h-full flex`} style={darkBorder.style}>
                 <MusicPlayer home={home} />
             </div>
         );
     }
 
     return (
-        <div className='h-full flex flex-col gap-2'>
+        <div className='h-full flex flex-col gap-1'>
             <div className={`${border.className} max-h-[30%] flex-1 flex flex-col gap-1`} style={border.style}>
                 <form className='flex-1 flex flex-row justify-between items-center px-3' onSubmit={handleSubmit}>
                     <input ref={inputRef} className='input-border' type="text" placeholder='Search song...' required />

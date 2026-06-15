@@ -16,7 +16,6 @@ function killPython() {
 
 function startPython() {
   if (app.isPackaged) {
-    // ✅ production — run bundled exe
     const exePath = path.join(process.resourcesPath, 'backend', 'app.exe')
     pythonProcess = spawn(exePath)
   } else {
@@ -65,9 +64,10 @@ function createWindow() {
   if (app.isPackaged) {
     win.loadFile(path.join(process.resourcesPath, 'frontend', 'index.html'))
   } else {
-    win.loadURL('http://localhost:5173')
+    win.loadURL('http://localhost:5173/')
   }
 
+  win.webContents.openDevTools({ mode: 'detach' })
   win.setIgnoreMouseEvents(true, { forward: true })
 }
 

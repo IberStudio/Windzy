@@ -3,6 +3,7 @@ import type { Task } from "../types/task";
 import { postData } from "../utils/fetch";
 import Button from "./Button";
 import { Border } from "./Border";
+import { useLoading } from "../context/LoadingContext";
 
 type Props = {
   tasks: Task[];
@@ -13,25 +14,30 @@ const TasksForm = ({ tasks, setTasks }: Props) => {
   const border = Border("borders", "brownBorder");
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const {setIsLoading} = useLoading()
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const value = inputRef.current?.value?.trim();
     if (!value) return;
 
+    setIsLoading(true) 
+    
     const exists = tasks.some(
       (task) => task.title.toLowerCase() === value.toLowerCase()
     );
-
+    
     if (exists) {
       console.log("Task already exists");
       return;
     }
-
+    
     const created = await postData<Task>("tasks", {
       title: value,
       completed: false,
     });
+    setIsLoading(true) 
 
     setTasks((prev) => [...prev, created]);
 

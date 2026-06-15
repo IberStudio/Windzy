@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useRef } from 'react';
 import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
 
 import Main from './layout/Main'
 import TitleBar from './layout/TitleBar'
@@ -9,13 +8,14 @@ import Navbar from './layout/Navbar'
 import './styles/globals.css'
 import type { Pages } from './types/pages';
 import { PlayerProvider } from './context/PlayerContext';
-
-gsap.registerPlugin(useGSAP);
+import { LoadingProvider } from './context/LoadingContext';
+import HiddenButton from './components/HiddenButton';
 
 function App() {
   const [isHidden, setIsHidden] = useState(false)
 
   const toggleHidden = () => {
+    console.log("hey")
     setIsHidden(!isHidden)
   } 
 
@@ -29,43 +29,52 @@ function App() {
     })
   }, [isHidden])
 
-  const [currentPage, setCurrentPage] = useState<Pages>()
+  const [currentPage, setCurrentPage] = useState<Pages>("home")
 
   return (
-    <div 
-      className='h-screen flex flex-col gap-2'
-    >
-      <div
-        className='h-fit'  
-        onMouseMove={() => {window.electronAPI.setIgnoreMouseEvents(false)}}
-        onMouseLeave={() => {window.electronAPI.setIgnoreMouseEvents(true)}}
-      >
-        <TitleBar 
-          minimize={toggleHidden} 
-          close={() => window.electronAPI.close()}
-        /> 
-      </div>  
+      <LoadingProvider
+      onMouseEnter={() => {window.electronAPI.setIgnoreMouseEvents(false)}}
+      onMouseLeave={() => {window.electronAPI.setIgnoreMouseEvents(false)}}
+      > 
+        <div
+        className='h-screen flex flex-col'
+        >
+          <div
+            className='h-fit'  
+            onMouseMove={() => {window.electronAPI.setIgnoreMouseEvents(false)}}
+            onMouseLeave={() => {window.electronAPI.setIgnoreMouseEvents(true)}}
+          >
+            <HiddenButton 
+            setIsHidden={toggleHidden}
+            isHidden={isHidden}
+            />
+          </div>  
 
-      <div 
-        className='flex-1 flex flex-col min-h-0 gap-2'
-        ref={contentContainer}
-        onMouseLeave={() => {
-          window.electronAPI.setIgnoreMouseEvents(true)
-        }}
-        onMouseEnter={() => {
-          window.electronAPI.setIgnoreMouseEvents(false)
-        }}
-      >
-        <Navbar 
-        onClick={setCurrentPage}
-        />
-        <PlayerProvider>
-          <Main 
-          page={currentPage || "home"} 
-          />
-        </PlayerProvider>
-      </div>
-    </div>
+          <div 
+            className='flex-1 flex flex-col min-h-0 gap-1'
+            ref={contentContainer}
+            onMouseLeave={() => {
+              window.electronAPI.setIgnoreMouseEvents(true)
+            }}
+            onMouseEnter={() => {
+              window.electronAPI.setIgnoreMouseEvents(false)
+            }}
+          >
+            <TitleBar 
+              minimize={toggleHidden} 
+              close={() => window.electronAPI.close()}
+            /> 
+            <Navbar 
+            onClick={setCurrentPage}
+            />
+            <PlayerProvider>
+              <Main 
+              page={currentPage} 
+              />
+            </PlayerProvider>
+          </div>
+        </div>
+      </LoadingProvider>
   )
 }
 

@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <>
       <div 
-      className="h-full flex flex-col gap-2"
+      className="h-full flex flex-col gap-1"
       >
         <div className="h-[25%]">
           <Timer />
