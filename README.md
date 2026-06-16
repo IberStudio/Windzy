@@ -18,7 +18,7 @@ A cozy and lightweight desktop music player built for a simple listening experie
 
 ## Download
 
-➡️ **[Latest Release](https://drive.google.com/file/d/1nIeI31TEStpXbZtapAlfX2TRmK6Ow_Q6/view?usp=drive_link)**
+➡️ **[Latest Release](https://drive.google.com/file/d/1xLHsz30w4e0fknbgzPJGMIjcJJXWs3ED/view?usp=sharing)**
 
 ## Installation
 
