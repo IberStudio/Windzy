@@ -13,8 +13,13 @@ const Tasks = () => {
   useEffect(() => {
     const loadTasks = async () => {
       setIsLoading(true)
-      const data = await getData<Task[]>("tasks");
-      setIsLoading(false)
+      let data
+      try {
+        data = await getData<Task[]>("tasks");
+      }
+      finally {
+        setIsLoading(false)
+      }
       setTasks(data ?? []);
     };
     loadTasks();

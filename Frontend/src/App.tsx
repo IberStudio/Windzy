@@ -37,7 +37,7 @@ function App() {
       onMouseLeave={() => {window.electronAPI.setIgnoreMouseEvents(false)}}
       > 
         <div
-        className='h-screen flex flex-col'
+        className='h-screen w-90 flex flex-col'
         >
           <div
             className='h-fit'  

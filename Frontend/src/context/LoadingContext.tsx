@@ -37,7 +37,7 @@ export const LoadingProvider = ({ children, onMouseEnter, onMouseLeave }: { chil
         <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
             {isLoading && (
             <div 
-            className="bg-black/50 w-full h-full absolute z-50 top-0 left-0 flex justify-center items-center pointer-events-auto"
+            className="bg-black/50 w-90 h-full absolute z-50 top-0 left-0 flex justify-center items-center pointer-events-auto"
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             >
