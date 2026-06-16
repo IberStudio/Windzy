@@ -13,8 +13,8 @@ A cozy and lightweight desktop music player built for a simple listening experie
 
 ## Screenshots
 
-![Home](./screenshots/home.png)
-![Player](./screenshots/player.png)
+![Home](./Preview/Home.png)
+![Player](./Preview/Music.png)
 
 ## Download
 
