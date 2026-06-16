@@ -67,7 +67,7 @@ function createWindow() {
     win.loadURL('http://localhost:5173/')
   }
 
-  // win.webContents.openDevTools({ mode: 'detach' })
+  win.webContents.openDevTools({ mode: 'detach' })
   win.setIgnoreMouseEvents(true, { forward: true })
 }
 

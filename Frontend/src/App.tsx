@@ -38,7 +38,7 @@ function App() {
       isHidden={isHidden}
       > 
         <div
-        className='h-screen flex flex-col'
+        className='h-screen w-90 flex flex-col'
         >
           <div
             className='h-fit'  

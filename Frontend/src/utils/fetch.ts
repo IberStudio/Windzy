@@ -1,6 +1,6 @@
 import type { Endpoint } from "../types/endpoint";
 
-const API_URL = "http://localhost:5000/api/";
+const API_URL = `http://${window.location.hostname}:5000/api/`;
 
 const request = async <T>(
     endpoint: Endpoint,

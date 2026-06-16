@@ -65,13 +65,13 @@ const HiddenButton = ({ isHidden, setIsHidden }: { isHidden: boolean, setIsHidde
 
     useGSAP(() => {
         gsap.set(elementRef.current, {
-            x: "500%"
+            x: "-100%"
         })
     })
 
     useEffect(() => {
         gsap.to(elementRef.current, {
-            x: isHidden ? "0%" : "500%",
+            x: isHidden ? "0%" : "-100%",
             y: y,
             duration: 0.3
         })

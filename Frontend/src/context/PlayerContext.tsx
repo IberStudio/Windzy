@@ -5,7 +5,7 @@ import type { TrackOutput } from '../types/track'
 import { getData, putData } from '../utils/fetch'
 import { useLoading } from './LoadingContext';
 
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = `http://${window.location.hostname}:5000/api`;
 
 type PlayerContextType = {
     player: React.RefObject<HTMLAudioElement | null>;
@@ -87,6 +87,7 @@ export const PlayerProvider = ({ children }: { children: ReactNode }) => {
     }, []);
 
     useEffect(() => {
+        console.log(videoId)
         if (!videoId) return;
         putData('stream/last' as any, 1 as number, { videoId: videoId }).catch(console.error);
     }, [videoId]);
