@@ -35,6 +35,7 @@ function App() {
       <LoadingProvider
       onMouseEnter={() => {window.electronAPI.setIgnoreMouseEvents(false)}}
       onMouseLeave={() => {window.electronAPI.setIgnoreMouseEvents(false)}}
+      isHidden={isHidden}
       > 
         <div
         className='h-screen flex flex-col'

@@ -6,7 +6,7 @@ const LoadingContext = createContext({
     setIsLoading: (_: boolean) => {}
 });
 
-export const LoadingProvider = ({ children, onMouseEnter, onMouseLeave }: { children: React.ReactNode, onMouseEnter: () => void, onMouseLeave: () => void }) => {
+export const LoadingProvider = ({ children, isHidden, onMouseEnter, onMouseLeave }: { children: React.ReactNode, isHidden: boolean, onMouseEnter: () => void, onMouseLeave: () => void }) => {
 
     const [isLoading, setIsLoading] = useState(false)
 
@@ -37,7 +37,7 @@ export const LoadingProvider = ({ children, onMouseEnter, onMouseLeave }: { chil
         <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
             {isLoading && (
             <div 
-            className="bg-black/50 w-full h-full absolute z-50 top-0 left-0 flex justify-center items-center pointer-events-auto"
+            className={`bg-black/50 w-full h-full absolute z-50 top-0 left-0 ${isHidden ? "hidden": "flex"} justify-center items-center pointer-events-auto`}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             >
