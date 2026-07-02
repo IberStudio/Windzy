@@ -1,11 +1,11 @@
 import type { Task } from "../types/task";
-import { deleteData, putData } from "../utils/fetch";
+import { deleteData, putData } from "../utils/api";
 import Button from "../components/Button";
-import { Border } from "../components/Border";
 import { icons } from "../utils/imports";
-import { useLoading } from "../context/LoadingContext";
+import { theme } from "../constants/theme";
 
 type Props = {
+  cn?: string;
   tasks: Task[];
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
 };
@@ -21,49 +21,63 @@ const TaskItem = ({
   onDelete?: () => void;
   onComplete?: () => void;
 }) => {
-  const isCompleted = () => (completed ? icons.cross : icons.tick);
-  const border = completed ? Border("borders", "green") : Border("borders", "red");
 
   return (
     <div
-      className={`${completed ? "completed" : ""} flex flex-row justify-between items-center ${border.className}`}
-      style={border.style}
+      className={`
+        w-full
+        flex flex-row justify-between items-center p-2 
+        bg-white
+        ${theme.outline.border} border-4 rounded-2xl
+      `}
+
     >
-      <p className="max-w-[70%] warp-break-words text-[white] px-1">{value}</p>
-      <div className="buttons flex gap-2">
+      <div
+      className={`
+        w-[50%] flex-1
+        flex flex-row justify-start items-center gap-2
+        `}
+      >
         <Button
-          value={{ name: "Delete", url: icons.trashCan }}
-          type="button"
-          onClick={onDelete}
+        cn="w-fit"
+        value={{
+          name: "Complete",
+          url: '',
+          value: completed
+        }}
+        type='checkbox'
+        onClick={onComplete}
         />
-        <Button
-          value={{ name: "Complete", url: isCompleted() }}
-          type="button"
-          onClick={onComplete}
-        />
+        <p 
+        className={`
+          ${completed ? "line-through" : ""} 
+          max-w-[70%] 
+          warp-break-all px-1 font-bold text-xl
+          `}
+        >
+          {value}
+        </p>
       </div>
+      <Button
+        value={{ name: "Delete", url: icons.trashCan }}
+        type="button"
+        onClick={onDelete}
+      />
     </div>
   );
 };
 
-const TaskItemContainer = ({ tasks = [], setTasks }: Props) => {
-  const border = Border("borders", "brownBorder");
-  const {setIsLoading} = useLoading()
+const TaskItemContainer = ({ cn, tasks = [], setTasks }: Props) => {
 
   const handleDelete = async (id: number) => {
-    setIsLoading(true)
-    await deleteData("tasks", id);
-    setIsLoading(false)
+    await deleteData("tasks", id, "Task Item");
     setTasks((prev) => prev.filter((task) => task.id !== id));
   };
 
   const handleComplete = async (id: number) => {
     const task = tasks.find((t) => t.id === id);
-    setIsLoading(true)
     if (!task) return;
-    await putData("tasks", id, { completed: !task.completed });
-    
-    setIsLoading(false)
+    await putData("tasks", id, { completed: !task.completed }, "Task Item");
     setTasks((prev) =>
       prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
     );
@@ -71,11 +85,10 @@ const TaskItemContainer = ({ tasks = [], setTasks }: Props) => {
 
   return (
     <div
-      className={`${border.className} h-full flex flex-col flex-1 gap-1 overflow-y-scroll`}
-      style={border.style}
+      className={`max-h-120 flex flex-col flex-1 gap-1 px-4 overflow-x-hidden overflow-y-auto ${cn}`}
     >
       {tasks.length === 0 ? (
-        <p className="m-auto text-3xl text-[white]">No Tasks</p>
+        <p className="m-auto text-3xl">No Tasks</p>
       ) : (
         tasks.map((task) => (
           <TaskItem

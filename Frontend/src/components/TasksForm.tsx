@@ -1,9 +1,9 @@
 import { useRef } from "react";
 import type { Task } from "../types/task";
-import { postData } from "../utils/fetch";
+import { postData } from "../utils/api";
 import Button from "./Button";
-import { Border } from "./Border";
 import { useLoading } from "../context/LoadingContext";
+import { theme } from "../constants/theme";
 
 type Props = {
   tasks: Task[];
@@ -11,35 +11,26 @@ type Props = {
 };
 
 const TasksForm = ({ tasks, setTasks }: Props) => {
-  const border = Border("borders", "brownBorder");
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const {setIsLoading} = useLoading()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const value = inputRef.current?.value?.trim();
     if (!value) return;
-    
-    setIsLoading(true)
 
     const exists = tasks.some(
       (task) => task.title.toLowerCase() === value.toLowerCase()
     );
     
-    if (exists) {
-      console.log("Task already exists");
-      setIsLoading(false)
+    if (exists) { 
       return;
     }
     
     const created = await postData<Task>("tasks", {
       title: value,
-      completed: false,
-    });
-    
-    setIsLoading(false)
+      completed: false, 
+    }, "Task Item");
 
     setTasks((prev) => [...prev, created]);
 
@@ -48,18 +39,26 @@ const TasksForm = ({ tasks, setTasks }: Props) => {
 
   return (
     <form
-      className={`${border.className} w-full flex flex-row justify-between`}
-      style={border.style}
+      className={`w-full flex flex-row justify-between gap-8 p-2`}
+
       onSubmit={handleSubmit}
     >
       <input
         ref={inputRef}
         type="text"
         placeholder="Add a task"
-        className="input-border w-[80%]"
+        className={`
+          w-full px-4 py-1
+          bg-white 
+          border-4 ${theme.outline.border} rounded-full
+          `} 
         required
       />
-      <Button value="Add" type="submit" />
+      <Button 
+      cn="text-white"
+      value="Add" 
+      type="submit" 
+      />
     </form>
   );
 };

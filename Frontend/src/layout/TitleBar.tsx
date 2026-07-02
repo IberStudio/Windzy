@@ -1,40 +1,36 @@
-import { Border } from "../components/Border"
 import Button from "../components/Button"
-import { borders, icons } from "../utils/imports"
+import { icons } from "../utils/imports"
 
 
 const TitleBar = ({ minimize, close }: { minimize?: () => void, close?: () => void }) => {
 
-  const parentBorder = Border("borders", "brownBorder")
-
   return (
     <div 
-      className={`${parentBorder.className} 
-        h-fit z-1 flex flex-row justify-between items-center`}
-      style={parentBorder.style}
+      className={` px-4 
+         z-1 flex flex-row justify-between items-center`}
       >
         <div
-        className={`w-16 h-16 flex justify-center items-center`}
+        className={`size-12 flex justify-center items-center`}
         style={{
-          backgroundImage: `url(${borders.frame})`,
+          backgroundImage: `url()`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover"
         }}
         >
           <img 
-            className="bg-white w-8 [image-rendering: pixelated]"
+            className="bg-white w-full [image-rendering: pixelated]"
             src={icons.mainIcon} 
             alt="Main Icon" 
           />
         </div>
-        <div className="buttons flex gap-2">
+        <div className="buttons flex gap-4">
           <Button
-            value={{
-              name: "Minimize",
-              url: icons.minimize
-            }}
-            type="button"
-            onClick={minimize}
+          value={{
+            name: "Minimize",
+            url: icons.minimize
+          }}
+          type="button"
+          onClick={minimize}
           />
           <Button
               value={{

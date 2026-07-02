@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react"
-import { Border } from "../components/Border"
-import Button from "../components/Button"
 import { icons } from "../utils/imports"
+import Button from "../components/Button";
+import Window from "../components/Window";
+import { BorderSize } from "../constants/borders";
+import { theme } from "../constants/theme";
 
 const Timer = () => {
 
-    const border = Border("borders", "whiteBorder")
 
     const FOCUS_SECONDS = 25 * 60;
     const BREAK_SECONDS = 5 * 60;
@@ -70,99 +71,90 @@ const Timer = () => {
 
     return (
         <div
-        className={`${border.className} h-full flex flex-col items-center justify-center gap-4`}
-        style={border.style}
+        className="flex flex-row justify-evenly items-center w-full gap-2 p-2"
         >
             <div
-            className="flex flex-row justify-evenly items-center w-full"
+            className="flex flex-row items-center gap-2"
             >
-                <div
-                className="flex flex-row items-center gap-2"
-                >
-                    <div>
-                        <div
-                        className="w-full flex flex-row justify-around"
-                        >
-                            <button
-                            className={`${isBreak ? "text-gray-500" : "text-black"} group relative pb-1`}
-                            onClick={() => {isBreak && switchMode()}}
-                            >
-                                Focus
-                                <span
-                                    className={`
-                                    ${isBreak ? "" : "w-full" }
-                                    absolute bottom-0 left-1/2
-                                    h-0.5 w-0
-                                    -translate-x-1/2
-                                    bg-current
-                                    transition-all duration-300
-                                    group-hover:w-full
-                                    `}
-                                />
-                            </button>
-                            <button
-                            className={`${!isBreak ? "text-gray-500" : "text-black"} group relative pb-1`}
-                            onClick={() => {!isBreak && switchMode()}}
-                            >
-                                Break
-                                <span
-                                    className={`
-                                    ${isBreak ? "w-full" : ""}
-                                    absolute bottom-0 left-1/2
-                                    h-0.5 w-0
-                                    -translate-x-1/2
-                                    bg-current
-                                    transition-all duration-300
-                                    group-hover:w-full
-                                    `}
-                                />
-                            </button>
-                        </div>
-                        <p 
-                        className="text-7xl text-black"
-                        >
-                            {format(minutes)}:{format(seconds)}
-                        </p>
-                    </div>
+                <div>
                     <div
-                    className="flex flex-col gap-4"
+                    className="w-full flex flex-row justify-around"
                     >
-                        <Button 
-                        value={{
-                            name: "Up",
-                            url: icons.upArrow
-                        }} 
-                        type="button"
-                        onClick={() => adjustMinutes(1)}
-                        color="gray"
-                        />
-                        <Button 
-                        value={{
-                            name: "Down",
-                            url: icons.downArrow
-                        }}
-                        type="button"
-                        onClick={() => adjustMinutes(-1)}
-                        color="gray"
-                        />
+                        <button
+                        className={`${isBreak ? "text-gray-500" : "text-black"} group relative pb-1`}
+                        onClick={() => {isBreak && switchMode()}}
+                        >
+                            Focus
+                            <span
+                                className={`
+                                ${isBreak ? "" : "w-full" }
+                                absolute bottom-0 left-1/2
+                                h-0.5 w-0
+                                -translate-x-1/2
+                                bg-current
+                                transition-all duration-300
+                                group-hover:w-full
+                                `}
+                            />
+                        </button>
+                        <button
+                        className={`${!isBreak ? "text-gray-500" : "text-black"} group relative pb-1`}
+                        onClick={() => {!isBreak && switchMode()}}
+                        >
+                            Break
+                            <span
+                                className={`
+                                ${isBreak ? "w-full" : ""}
+                                absolute bottom-0 left-1/2
+                                h-0.5 w-0
+                                -translate-x-1/2
+                                bg-current
+                                transition-all duration-300
+                                group-hover:w-full
+                                `}
+                            />
+                        </button>
                     </div>
+                    <p 
+                    className="text-7xl text-black"
+                    >
+                        {format(minutes)}:{format(seconds)}
+                    </p>
                 </div>
                 <div
-                className="flex flex-col gap-2"
+                className="flex flex-col gap-4"
                 >
                     <Button 
-                    value={isRunning ? "Pause" : "Start"} 
+                    value={{
+                        name: "Up",
+                        url: icons.upArrow
+                    }} 
                     type="button"
-                    onClick={toggleStart}
-                    color="gray"
+                    onClick={() => adjustMinutes(1)}
                     />
                     <Button 
-                    value="Reset" 
+                    value={{
+                        name: "Down",
+                        url: icons.downArrow
+                    }}
                     type="button"
-                    onClick={reset}
-                    color="gray"
+                    onClick={() => adjustMinutes(-1)}
                     />
                 </div>
+            </div>
+            <div
+            className="flex flex-col gap-2"
+            >
+                <Button 
+                value={isRunning ? "Pause" : "Start"} 
+                type="button"
+                onClick={toggleStart}
+                />
+                <Button 
+                value="Reset" 
+                type="button"
+                onClick={reset}
+                />
             </div>
         </div>
     )

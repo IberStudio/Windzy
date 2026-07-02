@@ -1,8 +1,7 @@
-// context/PlayerContext.tsx
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import type { TrackOutput } from '../types/track'
-import { getData, putData } from '../utils/fetch'
+import { getData, putData } from '../utils/api'
 import { useLoading } from './LoadingContext';
 
 const API_BASE = `http://${window.location.hostname}:5000/api`;
@@ -21,6 +20,7 @@ type PlayerContextType = {
     playNext: () => void;
     playPrev: () => void;
     handleSeek: (time: number) => void;
+    replay: () => void;
 };
 
 const PlayerContext = createContext<PlayerContextType | null>(null);
@@ -35,23 +35,22 @@ export const PlayerProvider = ({ children }: { children: ReactNode }) => {
     const [currentTime, setCurrentTime] = useState<number>(0);
     const [duration, setDuration] = useState<number>(0);
     const [videoId, setVideoIdState] = useState<string>('');
+    const shouldAutoplay = useRef(true);
+    const errorSkipCount = useRef(0);
 
-    const { setIsLoading } = useLoading();
-
-    async function loadQueue(videoID: string) {
+    async function loadQueue(videoID: string, autoplay: boolean = true) {
         if (!videoID) return;
-        setIsLoading(true);
         type RelatedResponse = { related: string[] };
-        const data = await putData<RelatedResponse>('stream', `related`, { videoId: videoID });
+        const data = await putData<RelatedResponse>('stream', `related`, { videoId: videoID }, 'Music Player');
         const mergedQueue = [videoID, ...data.related];
-        setIsLoading(false);
+        shouldAutoplay.current = autoplay;
         setQueueTrack(mergedQueue);
         setCurrentIndex(0);
     }
 
     async function trackInfo(videoID: string, current: boolean) {
         if (!videoID) return;
-        const data: TrackOutput = await putData<TrackOutput>('stream', `info`, { id: videoID });
+        const data: TrackOutput = await putData<TrackOutput>('stream', `info`, { id: videoID }, 'Music Player');
         if (current) {
             setCurrentTrack(data);
         } else {
@@ -77,7 +76,8 @@ export const PlayerProvider = ({ children }: { children: ReactNode }) => {
                 const data = await getData<{ videoId: string }>('stream/last' as any);
                 if (data?.videoId) {
                     setVideoIdState(data.videoId);
-                    loadQueue(data.videoId);
+                    trackInfo(data.videoId, true);
+                    loadQueue(data.videoId, false);
                 }
             } catch (err) {
                 console.error('no last video found', err);
@@ -87,18 +87,12 @@ export const PlayerProvider = ({ children }: { children: ReactNode }) => {
     }, []);
 
     useEffect(() => {
-        console.log(videoId)
         if (!videoId) return;
-        putData('stream/last' as any, 1 as number, { videoId: videoId }).catch(console.error);
+        putData('stream/last' as any, 1 as number, { videoId: videoId }, 'Music Player').catch(console.error);
     }, [videoId]);
 
     useEffect(() => {
         if (currentIndex === null || queueTrack.length === 0 || !player.current) return;
-
-        if (currentIndex >= queueTrack.length - 1) {
-            loadQueue(queueTrack[queueTrack.length - 1]);
-            setCurrentIndex(0);
-        }
 
         trackInfo(queueTrack[currentIndex], true);
         queueInfo(queueTrack[currentIndex + 1]);
@@ -106,17 +100,31 @@ export const PlayerProvider = ({ children }: { children: ReactNode }) => {
         const audio = player.current;
         audio.pause();
         audio.src = `${API_BASE}/stream/play/${queueTrack[currentIndex]}`;
-        setIsLoading(true);
         audio.load();
         audio.oncanplay = () => {
-            audio.play().catch((err) => {
-                if (err.name !== 'AbortError') console.error(err);
-            });
-            setIsLoading(false);
+            errorSkipCount.current = 0;
+            if (shouldAutoplay.current) {
+                audio.play().catch((err) => {
+                    if (err.name !== 'AbortError') console.error(err);
+                });
+            }
+            shouldAutoplay.current = true;
         };
 
         audio.onerror = () => {
-            setIsLoading(false);
+            console.error(`Failed to load audio (track: ${queueTrack[currentIndex]})`);
+
+            errorSkipCount.current += 1;
+            if (errorSkipCount.current > queueTrack.length) {
+                console.error('All tracks in queue failed to load — stopping to avoid infinite retry loop');
+                return;
+            }
+
+            if (currentIndex < queueTrack.length - 1) {
+                setCurrentIndex(currentIndex + 1);
+            } else {
+                loadQueue(queueTrack[queueTrack.length - 1]);
+            }
         };
 
         setCurrentTime(0);
@@ -130,9 +138,11 @@ export const PlayerProvider = ({ children }: { children: ReactNode }) => {
         const onPlay = () => setIsPlaying(true);
         const onPause = () => setIsPlaying(false);
         const onEnded = () => {
-            setCurrentIndex((prev) =>
-                prev !== null && prev < queueTrack.length - 1 ? prev + 1 : prev
-            );
+            if (currentIndex < queueTrack.length - 1) {
+                setCurrentIndex(currentIndex + 1);
+            } else {
+                loadQueue(queueTrack[queueTrack.length - 1]);
+            }
         };
         const onTimeUpdate = () => setCurrentTime(audio.currentTime);
         const onLoadedMetadata = () => setDuration(audio.duration);
@@ -150,7 +160,7 @@ export const PlayerProvider = ({ children }: { children: ReactNode }) => {
             audio.removeEventListener('timeupdate', onTimeUpdate);
             audio.removeEventListener('loadedmetadata', onLoadedMetadata);
         };
-    }, [queueTrack]);
+    }, [queueTrack, currentIndex]);
 
     function togglePlay() {
         if (!player.current || queueTrack.length === 0) return;
@@ -160,6 +170,8 @@ export const PlayerProvider = ({ children }: { children: ReactNode }) => {
     function playNext() {
         if (currentIndex < queueTrack.length - 1) {
             setCurrentIndex(currentIndex + 1);
+        } else {
+            loadQueue(queueTrack[queueTrack.length - 1]);
         }
     }
 
@@ -177,6 +189,15 @@ export const PlayerProvider = ({ children }: { children: ReactNode }) => {
         setCurrentTime(time);
     }
 
+    function replay() {
+        if (!player.current) return;
+        player.current.currentTime = 0;
+        player.current.play().catch((err) => {
+            if (err.name !== 'AbortError') console.error(err);
+        });
+        setCurrentTime(0);
+    }
+
     return (
         <PlayerContext.Provider value={{
             player,
@@ -192,6 +213,7 @@ export const PlayerProvider = ({ children }: { children: ReactNode }) => {
             playNext,
             playPrev,
             handleSeek,
+            replay,
         }}>
             <audio ref={player} />
             {children}

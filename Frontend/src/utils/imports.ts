@@ -17,6 +17,9 @@ import replay from "../assets/icons/replay.png";
 import music from "../assets/icons/music.png";
 import upArrow from "../assets/icons/up-arrow.png";
 import downArrow from "../assets/icons/down-arrow.png";
+import petIcon from "../assets/icons/pet.png";
+import restore from "../assets/icons/restore.png";
+import miniDisplay from "../assets/icons/mini-display.png";
 
 export const icons = {
     gear,
@@ -36,51 +39,46 @@ export const icons = {
     music,
     upArrow,
     downArrow,
+    petIcon,
+    restore,
+    miniDisplay,
 } as const;
 
-
-import window from "../assets/borders/window.png";
-import frame from "../assets/borders/frame.png";
-import darkBrownBorder from "../assets/borders/dark-brown.png";
-import green from "../assets/borders/green.png";
-import hover from "../assets/borders/hover.png";
-import red from "../assets/borders/red.png";
-import whiteBorder from "../assets/borders/white.png";
-import grayBorder from "../assets/borders/gray.png";
-import brownBorder from "../assets/borders/brown.png";
+import baseBorder from "../assets/borders/base.png";
+import titleBar from "../assets/borders/titleBar.png";
+import content from "../assets/borders/content.png";
+import activeTab from "../assets/borders/activeTab.png";
+import unactiveTab from "../assets/borders/unactiveTab.png";
 
 export const borders = {
-    window,
-    frame,
-    brownBorder,
-    green,
-    hover,
-    red,
-    whiteBorder,
-    grayBorder,
-    darkBrownBorder,
+    baseBorder,
+    titleBar,
+    content,
+    activeTab,
+    unactiveTab,
 } as const;
 
 export type BorderName = keyof typeof borders;
 
-
-
 import darkBrownButton from "../assets/buttons/brown.png";
+import lightBrownButton from "../assets/buttons/lightBrown.png";
 import whiteButton from "../assets/buttons/white.png";
 import greenButton from "../assets/buttons/green.png";
 import redButton from "../assets/buttons/red.png";
-import grayButton from "../assets/buttons/gray.png";
+import baseButton from "../assets/buttons/base.png";
 
 export const buttons = {
     darkBrownButton,
+    lightBrownButton,
     whiteButton,
     greenButton,
     redButton,
-    grayButton,
+    baseButton,
 } as const;
 
-
 export type ButtonName = keyof typeof buttons;
+
+
 
 import emptyLoading from "../assets/loading/bar-empty.png";
 import filledLoading from "../assets/loading/bar-filled.png";
@@ -89,3 +87,4 @@ export const loadings = {
     emptyLoading,
     filledLoading,
 }
+

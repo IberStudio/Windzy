@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { borders, icons } from '../utils/imports';
 import gsap from 'gsap';
 import { useGSAP } from "@gsap/react"
+import { theme } from '../constants/theme';
 
 gsap.registerPlugin(useGSAP);
 
@@ -25,7 +26,6 @@ const HiddenButton = ({ isHidden, setIsHidden }: { isHidden: boolean, setIsHidde
         holdTimeout.current = setTimeout(() => {
             if (!hasMoved.current) {
                 setIsHeld(true);
-                console.log("held!");
             }
         }, 500);
     }
@@ -71,7 +71,7 @@ const HiddenButton = ({ isHidden, setIsHidden }: { isHidden: boolean, setIsHidde
 
     useEffect(() => {
         gsap.to(elementRef.current, {
-            x: isHidden ? "0%" : "-100%",
+            x: isHidden ? "0%" : "-110%",
             y: y,
             duration: 0.3
         })
@@ -83,14 +83,17 @@ const HiddenButton = ({ isHidden, setIsHidden }: { isHidden: boolean, setIsHidde
         onMouseDown={onMouseDown}
         onDoubleClick={setIsHidden}
         style={{ 
-            transform: `translateY(${y}px)`, 
-            backgroundImage: `url(${borders.window})`,
-            backgroundRepeat: `no-repeat`
+            transform: `translateY(${y}px)`,
         }}
-        className={`z-200 w-20 h-16 absolute bg-cover [image-rendering:pixelated] flex justify-center items-center cursor-pointer pb-1 pr-2`}
+        className={`
+            z-200 w-20 h-20 absolute flex justify-center items-center cursor-pointer pb-1 pr-2
+            ${theme.primary.bg} 
+            border-4 rounded-xl ${theme.outline.border}
+            shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
+            `}
         >
             <img 
-            className='w-[90%] h-[90%]'
+            className='w-[90%] h-[90%] icon-outline'
             src={icons.mainIcon} 
             alt="Main Icon" 
             draggable="false"

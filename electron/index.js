@@ -4,6 +4,7 @@ const path = require('path')
 const http = require('http')
 
 let pythonProcess = null
+let mainWindow = null
 
 function killPython() {
   if (pythonProcess) {
@@ -13,6 +14,7 @@ function killPython() {
     pythonProcess = null
   }
 }
+
 
 function startPython() {
   if (app.isPackaged) {
@@ -41,12 +43,15 @@ function waitForFlask(callback) {
     setTimeout(() => waitForFlask(callback), 500)
   })
 }
+const TASKBAR_RESERVED_HEIGHT = 8 
 
 function createWindow() {
-  const { height } = screen.getPrimaryDisplay().workAreaSize
+  const { width, height } = screen.getPrimaryDisplay().bounds
+  const windowHeight = height - TASKBAR_RESERVED_HEIGHT
+
   const win = new BrowserWindow({
-    width: 360,
-    height: height,
+    width: width,
+    height: windowHeight,
     x: 0,
     y: 0,
     icon: path.join(__dirname, 'assets', 'icon.ico'),
@@ -67,13 +72,26 @@ function createWindow() {
     win.loadURL('http://localhost:5173/')
   }
 
-  win.webContents.openDevTools({ mode: 'detach' })
+  win.moveTop()
+  win.setAlwaysOnTop(true, 'modal-panel')
+
+  // win.webContents.openDevTools({ mode: 'detach' })
+
   win.setIgnoreMouseEvents(true, { forward: true })
+
+  mainWindow = win
 }
 
 ipcMain.on('set-ignore-mouse-events', (event, ignore) => {
   const win = BrowserWindow.fromWebContents(event.sender)
+  if (!win) return
+
   win.setIgnoreMouseEvents(ignore, { forward: true })
+
+  if (!ignore) {
+    win.setAlwaysOnTop(true, 'modal-panel')
+    win.moveTop()
+  }
 })
 
 ipcMain.on('close-window', () => {
@@ -82,7 +100,7 @@ ipcMain.on('close-window', () => {
 
 app.whenReady().then(() => {
   startPython()
-  waitForFlask(() => createWindow()) 
+  waitForFlask(() => createWindow())
 })
 
 app.on('window-all-closed', () => {

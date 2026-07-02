@@ -1,8 +1,11 @@
+import { theme } from '../constants/theme';
+import { LoadingProvider } from '../context/LoadingContext';
 import { usePlayer } from '../context/PlayerContext'
+import { useWindows } from '../context/WindowContext';
 import { icons } from '../utils/imports'
 import Button from './Button'
 
-const MusicPlayer = ({ home }: { home: boolean }) => {
+const MusicPlayer = () => {
     const {
         currentTrack,
         nextTrack,
@@ -13,7 +16,13 @@ const MusicPlayer = ({ home }: { home: boolean }) => {
         playNext,
         playPrev,
         handleSeek,
+        replay,
     } = usePlayer();
+
+    const {
+        windows,
+        showWindow
+    } = useWindows();
 
     const format = (secs: number) => {
         const m = Math.floor(secs / 60);
@@ -21,79 +30,68 @@ const MusicPlayer = ({ home }: { home: boolean }) => {
         return `${m}:${s.toString().padStart(2, '0')}`;
     };
 
-    if (home) {
-        return (
-            <div className='w-full flex flex-row justify-between items-center gap-3 px-2'>
-                <div className='size-28 shrink-0 border-2 border-gray-800 rounded-xl overflow-hidden'>
-                    <img className='w-full h-full object-cover' src={currentTrack?.thumbnail} alt={currentTrack?.title} />
-                </div>
-                <div className='min-w-0 flex flex-col gap-1 flex-1'>
-                    <div className='px-4 text-white'>
-                        <p className='text-md truncate'>{currentTrack?.title || 'No Track Selected'}</p>
-                        <p className='text-sm truncate'>{currentTrack?.songWriter || 'artist'}</p>
-                    </div>
-                    <div className='px-4 flex flex-col gap-1'>
-                        <input
-                            type="range"
-                            min={0}
-                            max={duration || 0}
-                            value={currentTime}
-                            onChange={(e) => handleSeek(Number(e.target.value))}
-                            className='w-full accent-white cursor-pointer'
-                        />
-                    <div className='flex justify-between text-xs text-gray-200'>
-                            <span>{format(currentTime)}</span>
-                            <span>{format(duration)}</span>
-                        </div>
-                    </div>
-                    <div className="flex flex-row justify-evenly items-center px-4 gap-4">
-                        <Button value={{ name: "Previous", url: icons.previous }} type="button" onClick={playPrev} color='white' />
-                        <Button value={{ name: "Play", url: isPlaying ? icons.pause : icons.play }} type="button" onClick={togglePlay} color='white' />
-                        <Button value={{ name: "Next", url: icons.next }} type="button" onClick={playNext} color='white' />
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
     return (
-        <div className='flex flex-col justify-center items-center gap-1 px-8'>
+        <div className='relative flex flex-col items-center gap-3'>
+            <LoadingProvider loadingKey='Music Player'/>
             <img
-                className='min-w-48 [@media(min-height:830px)]:h-60 h-48 rounded-xl border-2 border-gray-800 object-cover'
+                className={`
+                    w-64 h-64 
+                    rounded-xl border-4 ${theme.outline.border}
+                    object-cover mt-4`}
                 src={currentTrack?.thumbnail}
                 alt={currentTrack?.title}
             />
-            <div className='flex flex-col w-full'>
+            <div className='flex flex-col w-full px-8'>
                 <p className='text-md line-clamp-2'>{currentTrack?.title || 'No Track Selected'}</p>
-                <p className='text-sm line-clamp-1'>{currentTrack?.songWriter || ''}</p>
+                <p className='text-sm line-clamp-1'>{currentTrack?.songWriter || 'Songwriter'}</p>
             </div>
 
-            <div className='w-full flex flex-col gap-1'>
+            <div className='w-full flex flex-col gap-1 px-8'>
                 <input
                     type="range"
                     min={0}
                     max={duration || 0}
                     value={currentTime}
                     onChange={(e) => handleSeek(Number(e.target.value))}
-                    className='w-full accent-white cursor-pointer'
+                    className={`w-full rounded-xl cursor-pointer`}
                 />
-                <div className='flex justify-between text-xs text-gray-700'>
+                <div className='flex justify-between text-xs text-gray-800'>
                     <span>{format(currentTime)}</span>
                     <span>{format(duration)}</span>
                 </div>
             </div>
 
-            <div className="flex flex-row justify-between items-center px-4 gap-4">
-                <Button value={{ name: "Previous", url: icons.previous }} type="button" onClick={playPrev} />
-                <Button value={{ name: "Play", url: isPlaying ? icons.pause : icons.play }} type="button" onClick={togglePlay} />
-                <Button value={{ name: "Next", url: icons.next }} type="button" onClick={playNext} />
+            <div className="flex flex-row justify-between items-center px-4 gap-8">
+                <Button cn='w-fit h-fit' value={{ name: "Replay", url: icons.replay }} type="button" onClick={replay} />
+                <div className='flex flex-row justify-evenly items-center gap-3'>
+                    <Button value={{ name: "Previous", url: icons.previous }} type="button" onClick={playPrev} />
+                    <Button value={{ name: "Play", url: isPlaying ? icons.pause : icons.play }} type="button" onClick={togglePlay} />
+                    <Button value={{ name: "Next", url: icons.next }} type="button" onClick={playNext} />
+                </div>
+                <Button cn='w-fit h-fit' value={{ name: "Display", url: icons.miniDisplay }} type="button" onClick={() => {showWindow(2); console.log(windows)}}/>
             </div>
 
-            <div className='w-full flex flex-row justify-between mt-4'>
-                <Button value={{ name: "Replay", url: icons.replay }} type="button" />
-                <div className='flex flex-row justify-center gap-4'>
-                    <p className='text-sm'>Queue:</p>
-                    <img className='w-12 h-12 rounded-xl border-2 border-white object-cover' src={nextTrack?.thumbnail} alt="" />
+            <div className='w-full flex flex-row justify-between items-center mt-2 px-4 py-8'>
+                <div className={`
+                    w-full
+                    flex flex-col justify-center gap-6 p-4
+                    ${theme.primary.bg} ${theme.secondary.text}
+                    ${theme.outline.border} border-4 rounded-xl
+                    `}>
+                    <p className={`
+                        text-xl text-start 
+                        pb-2
+                        border-b-4 ${theme.secondary.border}
+                        `}>
+                            Next Queue
+                    </p>
+                    <div className={`flex flex-row gap-4 items-cente truncate`}>
+                        <img className='w-16 h-16 rounded-xl border-2 border-white object-cover' src={nextTrack?.thumbnail} alt={nextTrack?.title} />
+                        <div className="text-start line-clamp-1 w-48">
+                            <p className='text-lg'>{nextTrack?.title || 'No Track Selected'}</p>
+                            <p className='text-sm'>{nextTrack?.songWriter || 'Songwriter'}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,70 +1,95 @@
 import React, { useRef, useState } from 'react'
-import { Border } from '../components/Border'
 import Button from '../components/Button'
 import MusicOutput from '../components/MusicOutput'
 import MusicPlayer from '../components/MusicPlayer'
 import type { TrackOutput } from '../types/track'
-import { putData } from '../utils/fetch'
+import { putData } from '../utils/api'
 import { usePlayer } from '../context/PlayerContext'
-import { useLoading } from '../context/LoadingContext'
+import { LoadingProvider } from '../context/LoadingContext'
+import { theme } from '../constants/theme'
 
-const Music = ({ home }: { home: boolean }) => {
+const Music = () => {
 
-    const border = Border("borders", "brownBorder")
-    const darkBorder = Border("borders", "grayBorder")
     const { setVideoId } = usePlayer();
 
     const inputRef = useRef<HTMLInputElement>(null);
     const [searchOutput, setSearchOutput] = useState<TrackOutput[]>([]);
 
-    const { setIsLoading } = useLoading();
-
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setIsLoading(true);
 
         const value = inputRef.current?.value?.trim();
         if (!value) return;
-        const data = await putData<TrackOutput[]>('stream', `search`, { title: value });
+        const data = await putData<TrackOutput[]>('stream', `search`, { title: value }, "Search Music");
         
-        setIsLoading(false);
         setSearchOutput(data);
     }
 
-    if (home) {
-        return (
-            <div className={`${darkBorder.className} max-w-full h-full flex`} style={darkBorder.style}>
-                <MusicPlayer home={home} />
-            </div>
-        );
-    }
-
     return (
-        <div className='h-full flex flex-col gap-1'>
-            <div className={`${border.className} max-h-[30%] flex-1 flex flex-col gap-1`} style={border.style}>
-                <form className='flex-1 flex flex-row justify-between items-center px-3' onSubmit={handleSubmit}>
-                    <input ref={inputRef} className='input-border' type="text" placeholder='Search song...' required />
-                    <Button value="Search" type='submit' />
+        <div 
+        className={`${theme.secondary.bg} h-full flex flex-row`}
+        >
+            <div 
+            className={`
+                flex-3 flex flex-col gap-5 
+                border-r-4 ${theme.outline.border}
+                `}
+            >
+                <h2
+                className='
+                flex justify-center items-center text-center mt-5
+                text-3xl font-bold 
+                '
+                >
+                    Find Your Song
+                </h2>
+                <form className='flex flex-row justify-between items-center px-2 gap-2 border-b-4 border-black pb-4' onSubmit={handleSubmit}>
+                    <input 
+                    ref={inputRef} 
+                    className={`
+                        w-[80%]
+                        border-4 ${theme.outline.border}
+                        bg-white px-3 py-1 rounded-2xl
+                        `} 
+                    type="text" 
+                    placeholder='Search song...' 
+                    required />
+                    <Button cn='text-white' value="Search " type='submit' />
                 </form>
-                <div className='flex-5 flex flex-col gap-2 overflow-y-scroll'>
+                <div className='relative w-full h-full flex flex-col pl-4 pr-2 gap-2 max-h-120 pb-2 overflow-y-auto'>
+                    <LoadingProvider loadingKey='Search Music'/>
                     {searchOutput.length !== 0 ? (
                         searchOutput.map((track, index) => (
                             <MusicOutput
-                                key={index}
-                                videoId={track.videoId}
-                                thumbnail={track.thumbnail}
-                                title={track.title}
-                                songWriter={track.songWriter}
-                                onClick={() => setVideoId(track.videoId)}
+                            key={index}
+                            videoId={track.videoId}
+                            thumbnail={track.thumbnail}
+                            title={track.title}
+                            songWriter={track.songWriter}
+                            onClick={() => setVideoId(track.videoId)}
                             />
                         ))
                     ) : (
-                        <p className="m-auto text-3xl text-white">No Results</p>
+                        <p 
+                        className="w-full h-full flex justify-center items-center text-3xl">
+                            No Results
+                        </p>
                     )}
                 </div>
             </div>
-            <div className={`${border.className} max-h-[70%] flex-1 p-2`} style={border.style}>
-                <MusicPlayer home={home} />
+            <div
+            className={`flex-5 ${theme.primary.bg}`}
+            >
+
+            </div>
+            <div 
+            className={`
+                relative
+                flex-3 flex flex-col p-2
+                border-l-4 ${theme.outline.border}
+                `}
+            >
+                <MusicPlayer />
             </div>
         </div>
     );

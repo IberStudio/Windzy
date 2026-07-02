@@ -11,10 +11,6 @@ class Music(db.Model):
             "videoId" : self.video_id,
         }
 
-
-def get_last():
-    pass
-
 def get_info(id: str):
 
     info = ytmusic.get_song(id)
@@ -32,11 +28,10 @@ def get_result(query: str):
 
     try:
         results = ytmusic.search(query, filter="songs", limit=10)
-
         for info in results:
             result.append({
                 "videoId": info["videoId"],
-                "thumbnail": info["thumbnails"][1]["url"],
+                "thumbnail": info["thumbnails"][-1]["url"],
                 "title": info["title"],
                 "songWriter": [name["name"] for name in info["artists"]]
             })

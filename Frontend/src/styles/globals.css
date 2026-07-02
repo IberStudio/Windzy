@@ -1,9 +1,14 @@
 @import "tailwindcss";
 @tailwind utilities;
 
+:root {
+  --primary: #8c7369;
+  --secondary: #c3b2a8;
+}
+
 @font-face {
   font-family: "Pixel";
-  src: url("../assets/fonts/pixel.ttf") format("truetype");
+  src: url("../assets/fonts/fredoka.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -45,26 +50,79 @@ html, body {
   pointer-events: none !important;
 }
 
+.icon-invert button img{
+  filter: invert(1) !important;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none; 
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 8px;
+  background: rgb(from var(--color-primary) r g b / 30%);
+  border-radius: 16px;
+}
+
+input[type="range"]::-moz-range-track {
+  height: 8px;
+  background: rgb(from var(--color-primary) r g b / 30%);
+  border-radius: 16px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none; 
+  height: 8px;
+  width: 8px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  box-shadow: -405px 0 0 400px var(--color-primary);
+}
+
+input[type="range"]::-moz-range-thumb {
+  height: 8px;
+  width: 8px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  box-shadow: -405px 0 0 400px var(--color-primary);
+}
+
 @layer components {
   
   * {
     font-family: "Pixel", sans-serif;
     margin: 0;
     padding: 0;
+    user-select: none !important;
+    text: black 
   }
 
   ::-webkit-scrollbar {
-    display: none;
+    @apply w-2
   }
 
-  /* #root {
-    @apply max-h-screen flex flex-col relative gap-2
-  } */
-  
-  .navbar {
-    @apply w-full flex justify-evenly
+  ::-webkit-scrollbar-track {
+    background: transparent;
   }
-  
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full;
+    background: rgb(from var(--color-primary) r g b);
+  }
+
+  .icon-outline {
+    @apply [filter:drop-shadow(3px_0_0_white)_drop-shadow(0_3px_0_white)_drop-shadow(-2px_0_0_white)_drop-shadow(0_-2px_0_white)]
+  }
+
   .completed::before {
     content: "";
     position: absolute;

@@ -1,81 +1,74 @@
-import { useEffect, useState } from 'react'
-import { useRef } from 'react';
-import gsap from 'gsap';
+import { useState } from 'react'
 
 import Main from './layout/Main'
-import TitleBar from './layout/TitleBar'
-import Navbar from './layout/Navbar'
 import './styles/globals.css'
-import type { Pages } from './types/pages';
 import { PlayerProvider } from './context/PlayerContext';
-import { LoadingProvider } from './context/LoadingContext';
 import HiddenButton from './components/HiddenButton';
+import Pet from './features/Pet/Pet';
+import { PetProvider } from './features/Pet/hook/PetContext';
+import { WindowProvider, type WindowState } from './context/WindowContext';
+import WindowsLayer from './layout/WindowsLayer';
+import MusicPlayer from './layout/Windowed/MusicPlayer';
+import { BorderSize } from './constants/borders';
+
+const initialWindows: WindowState[] = [
+  // { id: 1, x: 100, y: 500, width: 0, height: 0, size: BorderSize.small, title: "Timer", children: <Timer /> },
+  { id: 2, x: 800, y: 500, width: 0, height: 0, size: BorderSize.small, title: "Music", children: <MusicPlayer /> },
+];
 
 function App() {
   const [isHidden, setIsHidden] = useState(false)
 
-  const toggleHidden = () => {
-    console.log("hey")
-    setIsHidden(!isHidden)
-  } 
-
-  // Animation
-  const contentContainer = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    gsap.to(contentContainer.current, { 
-      x: isHidden ? '-100%': 0, 
-      duration: 0.3
-    })
-  }, [isHidden])
-
-  const [currentPage, setCurrentPage] = useState<Pages>("home")
+  const toggleHidden = () => setIsHidden(!isHidden)
 
   return (
-      <LoadingProvider
-      onMouseEnter={() => {window.electronAPI.setIgnoreMouseEvents(false)}}
-      onMouseLeave={() => {window.electronAPI.setIgnoreMouseEvents(false)}}
-      isHidden={isHidden}
-      > 
+    <PetProvider>
+      <div className={`
+        h-screen w-screen flex flex-row
+        `}>
+        
         <div
-        className='h-screen w-90 flex flex-col'
+          className='w-fit h-fit'  
+          onMouseMove={() => {window.electronAPI.setIgnoreMouseEvents(false)}}
+          onMouseEnter={() => {window.electronAPI.setIgnoreMouseEvents(false)}}
+          onMouseLeave={() => {window.electronAPI.setIgnoreMouseEvents(true)}}
         >
-          <div
-            className='h-fit'  
-            onMouseMove={() => {window.electronAPI.setIgnoreMouseEvents(false)}}
-            onMouseLeave={() => {window.electronAPI.setIgnoreMouseEvents(true)}}
-          >
-            <HiddenButton 
+          <HiddenButton 
             setIsHidden={toggleHidden}
             isHidden={isHidden}
-            />
-          </div>  
+          />
+        </div>  
 
-          <div 
-            className='flex-1 flex flex-col min-h-0 gap-1'
-            ref={contentContainer}
-            onMouseLeave={() => {
-              window.electronAPI.setIgnoreMouseEvents(true)
-            }}
-            onMouseEnter={() => {
-              window.electronAPI.setIgnoreMouseEvents(false)
-            }}
-          >
-            <TitleBar 
-              minimize={toggleHidden} 
-              close={() => window.electronAPI.close()}
-            /> 
-            <Navbar 
-            onClick={setCurrentPage}
-            />
-            <PlayerProvider>
+        <PlayerProvider>
+          <WindowProvider initialWindows={initialWindows}>
+            <div 
+              className='w-full h-full flex-1 min-h-0'
+            >
               <Main 
-              page={currentPage} 
+              isHidden={isHidden} 
+              toggleHidden={toggleHidden}
+              ignoreFalse={() => window.electronAPI.setIgnoreMouseEvents(false)}
+              ignoreTrue={() => window.electronAPI.setIgnoreMouseEvents(true)}
+              closeApp={() => window.electronAPI.close()}
               />
-            </PlayerProvider>
-          </div>
-        </div>
-      </LoadingProvider>
+            </div>
+
+            <WindowsLayer 
+            ignoreTrue={() => window.electronAPI.setIgnoreMouseEvents(true)}
+            ignoreFalse={() => window.electronAPI.setIgnoreMouseEvents(false)}
+            />
+
+            <div className='absolute w-full h-full pointer-events-none'>
+              <Pet 
+                mouseIgnoreTrue={() => window.electronAPI.setIgnoreMouseEvents(true)}
+                mouseIgnoreFalse={() => window.electronAPI.setIgnoreMouseEvents(false)}
+                isHidden={isHidden}
+              />
+            </div>
+          </WindowProvider>
+        </PlayerProvider>
+      </div>
+    </PetProvider>
   )
 }
 
